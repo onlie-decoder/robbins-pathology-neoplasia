@@ -1463,7 +1463,7 @@ function startAmbientLoop(element, draw) {
 
     const scrollBoost = 0.85 + progress * 0.85;
     const length = baseLength * scrollBoost;
-    const width = baseWidth * (0.9 + progress * 0.5);
+    const starWidth = baseWidth * (0.9 + progress * 0.5);
 
     const roll = Math.random();
     let color = '#ffffff';
@@ -1487,7 +1487,7 @@ function startAmbientLoop(element, draw) {
       decay: decay,
       color: color,
       glowColor: glowColor,
-      width: width,
+      width: starWidth,
       tier: sizeTier
     };
   }
