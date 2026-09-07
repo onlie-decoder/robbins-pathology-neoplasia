@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robbins Pathology | Chapter 06: Neoplasia — Medical Portfolio Edition</title>
+    <meta name="description" content="Publication-grade medical pathology textbook summary & portfolio showcase of Robbins Basic Pathology Chapter 6: Neoplasia. Featuring 37 authentic high-resolution micrographs, 8 Hallmarks of Cancer, and the HTML-to-PDF Textbook architecture.">
+    <meta name="author" content="onlie-decoder">
+
+    <!-- Fonts: Outfit, Plus Jakarta Sans, Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        :root {
+            --bg-canvas: #070913;
+            --bg-surface: #0C101E;
+            --bg-card: rgba(15, 20, 36, 0.75);
+            --bg-card-hover: rgba(22, 30, 52, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(139, 92, 246, 0.35);
+            
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            
+            --accent-violet: #8B5CF6;
+            --accent-purple: #7C3AED;
+            --accent-rose: #F43F5E;
+            --accent-cyan: #00F2FE;
+            --accent-emerald: #10B981;
+            --accent-amber: #F59E0B;
+            
+            --glow-violet: 0 0 35px rgba(139, 92, 246, 0.25);
+            --glow-cyan: 0 0 30px rgba(0, 242, 254, 0.2);
+            --glow-rose: 0 0 30px rgba(244, 63, 94, 0.2);
+            
+            --font-display: 'Outfit', 'Prompt', sans-serif;
+            --font-body: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+        }
+
+        body {
+            background: radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 65%, rgba(244, 63, 94, 0.06) 0%, transparent 45%),
+                        radial-gradient(circle at 50% 90%, rgba(0, 242, 254, 0.05) 0%, transparent 50%),
+                        var(--bg-canvas);
+            min-height: 100vh;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Cyberpunk ultra-thin scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-canvas);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-violet);
+            border-radius: 4px;
+        }
+
+        /* Top Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(7, 9, 19, 0.85);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-rose));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: var(--glow-violet);
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-tag {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            margin-left: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet));
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyan {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-cyan:hover {
+            background: rgba(0, 242, 254, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 70px 0 50px;
+            position: relative;
+        }
+
+        .hero-badge-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            background: rgba(139, 92, 246, 0.12);
+            color: var(--accent-violet);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #FFFFFF 20%, #DDD6FE 50%, #F43F5E 80%, #00F2FE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 840px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .hero-subtitle strong {
+            color: var(--text-primary);
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 18px;
+            padding: 28px;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-highlight);
+            box-shadow: var(--glow-violet);
+        }
+
+        .bento-col-8 { grid-column: span 8; }
+        .bento-col-4 { grid-column: span 4; }
+        .bento-col-6 { grid-column: span 6; }
+        .bento-col-12 { grid-column: span 12; }
+
+        .bento-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .bento-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .bento-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        /* Hallmarks Matrix inside Bento */
+        .hallmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .hallmark-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .hallmark-pill:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            color: #DDD6FE;
+        }
+
+        .hallmark-pill i {
+            color: var(--accent-rose);
+            font-size: 0.9rem;
+        }
+
+        /* Stat Metrics */
+        .stat-metric-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-violet);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Headings */
+        .section-header-block {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-violet);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 40px;
+            padding: 4px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet));
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+        }
+
+        /* Figure Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .figure-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .figure-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-highlight);
+            box-shadow: 0 16px 32px -10px rgba(139, 92, 246, 0.25);
+        }
+
+        .figure-thumb-wrap {
+            width: 100%;
+            height: 230px;
+            background: #020409;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .figure-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+            transition: transform 0.4s ease;
+        }
+
+        .figure-card:hover .figure-thumb {
+            transform: scale(1.03);
+        }
+
+        .figure-badge-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(7, 9, 19, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .figure-type-overlay {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(139, 92, 246, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #DDD6FE;
+            text-transform: uppercase;
+        }
+
+        .figure-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .figure-title {
+            font-family: var(--font-display);
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .figure-caption-snippet {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .figure-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .inspect-link {
+            color: var(--accent-violet);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        /* Lightbox Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 5, 12, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: 20px;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), var(--glow-violet);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--accent-rose);
+            transform: scale(1.1);
+        }
+
+        .modal-img-container {
+            background: #020408;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .modal-info {
+            padding: 36px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .modal-badge-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .modal-caption {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .modal-credit {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        /* Downloads Hub */
+        .download-hub {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(244, 63, 94, 0.05) 50%, rgba(0, 242, 254, 0.08) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 44px;
+            margin-bottom: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .download-card {
+            background: rgba(12, 16, 30, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 26px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .download-card:hover {
+            border-color: var(--accent-violet);
+            transform: translateY(-4px);
+        }
+
+        .download-icon {
+            font-size: 2rem;
+            color: var(--accent-violet);
+            margin-bottom: 14px;
+        }
+
+        .download-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .download-meta {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            margin-bottom: 14px;
+        }
+
+        .download-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+
+        /* Skill Architecture Section */
+        .skill-section {
+            margin-bottom: 80px;
+        }
+
+        .code-window {
+            background: #04060C;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 24px;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
+        }
+
+        .code-header {
+            background: #090C16;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #EF4444; }
+        .dot-yellow { background: #F59E0B; }
+        .dot-green { background: #10B981; }
+
+        .code-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .code-body {
+            padding: 24px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #C7D2FE;
+            overflow-x: auto;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 50px 0 30px;
+            margin-top: 60px;
+            background: #05070D;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-author {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .footer-note {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .bento-col-8, .bento-col-4, .bento-col-6 {
+                grid-column: span 12;
+            }
+            .hallmarks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .modal-card {
+                grid-template-columns: 1fr;
+            }
+            .modal-img-container {
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+            .navbar {
+                padding: 12px 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-dna"></i>
+            </div>
+            <div>
+                <span class="brand-title">Pathology Portfolio</span>
+                <span class="brand-tag">v2.0 • ROBBINS 10E</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#hallmarks">8 Hallmarks</a></li>
+            <li><a href="#gallery">Micrograph Gallery</a></li>
+            <li><a href="#downloads">Textbook PDFs</a></li>
+            <li><a href="#architecture">Skill Architecture</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="https://github.com/onlie-decoder/robbins-pathology-neoplasia" target="_blank" class="btn-pill btn-secondary">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="pdf/neoplasia_complete_illustrated.pdf" download class="btn-pill btn-primary">
+                <i class="fa-solid fa-file-pdf"></i> Download PDF
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="overview">
+            <div class="hero-badge-wrap">
+                <span class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> MEDICAL PORTFOLIO SUBMISSION</span>
+                <span class="hero-badge"><i class="fa-solid fa-book-medical"></i> ROBBINS BASIC PATHOLOGY 10TH ED</span>
+                <span class="hero-badge" style="color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.3);"><i class="fa-solid fa-microscope"></i> 37 AUTHENTIC MICROGRAPHS</span>
+            </div>
+
+            <h1 class="hero-title">Neoplasia: Cellular & Molecular Pathology</h1>
+            <p class="hero-subtitle">
+                A publication-quality, <strong>47-page comprehensive medical textbook</strong> and computational publishing engine covering <strong>Robbins Basic Pathology Chapter 6</strong>. Featuring all 37 authentic high-resolution micrographs, the 8 Hallmarks of Cancer, molecular oncogenes, tumor suppressor cascades, and zero-token layout audits.
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="pdf/neoplasia_complete_illustrated.pdf" download class="btn-pill btn-primary" style="padding: 12px 26px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Download Complete Textbook (47 Pages, 8 MB)
+                </a>
+                <a href="#gallery" class="btn-pill btn-cyan" style="padding: 12px 24px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> Explore 37 Robbins Micrographs
+                </a>
+                <a href="#architecture" class="btn-pill btn-secondary" style="padding: 12px 24px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-code"></i> View html-to-pdf Architecture
+                </a>
+            </div>
+
+            <!-- Bento Grid Highlights -->
+            <div class="bento-grid">
+                <!-- Bento 1: 8 Hallmarks of Cancer Matrix -->
+                <div class="bento-card bento-col-8" id="hallmarks">
+                    <span class="bento-badge"><i class="fa-solid fa-dna"></i> Molecular Oncology Core</span>
+                    <h2 class="bento-title">The 8 Hallmarks of Cancer Deconstructed</h2>
+                    <p class="bento-desc">
+                        Carcinogenesis is a multistep clonal evolutionary process resulting from the sequential accumulation of driver mutations. Every hallmark described by Hanahan & Weinberg and Robbins Pathology is mapped to exact molecular circuits:
+                    </p>
+                    <div class="hallmarks-grid">
+                        <div class="hallmark-pill"><i class="fa-solid fa-bolt"></i> 1. Self-Sufficiency in Growth</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-ban"></i> 2. Insensitivity to Anti-Growth</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-fire"></i> 3. Altered Metabolism (Warburg)</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-shield-halved"></i> 4. Evasion of Apoptosis</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-infinity"></i> 5. Limitless Replication</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-droplet"></i> 6. Sustained Angiogenesis</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-route"></i> 7. Tissue Invasion & Metastasis</div>
+                        <div class="hallmark-pill"><i class="fa-solid fa-virus-slash"></i> 8. Immune Surveillance Evasion</div>
+                    </div>
+                </div>
+
+                <!-- Bento 2: Academic Statistics -->
+                <div class="bento-card bento-col-4">
+                    <span class="bento-badge"><i class="fa-solid fa-chart-simple"></i> Curriculum Scale</span>
+                    <h3 class="bento-title">Publication Metrics</h3>
+                    <div class="stat-metric-row">
+                        <div class="stat-box">
+                            <div class="stat-number">47</div>
+                            <div class="stat-label">A4 Pages</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" style="color: var(--accent-rose);">37</div>
+                            <div class="stat-label">Figures</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" style="color: var(--accent-cyan);">11</div>
+                            <div class="stat-label">Sections</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--text-secondary);">
+                        <i class="fa-solid fa-check-double" style="color: var(--accent-emerald);"></i> 100% Zero-token programmatic coordinate audit passed with 0 stranded headings.
+                    </div>
+                </div>
+
+                <!-- Bento 3: Micrograph Sourcing -->
+                <div class="bento-card bento-col-6">
+                    <span class="bento-badge"><i class="fa-solid fa-microscope"></i> High-Resolution Histopathology</span>
+                    <h3 class="bento-title">Zero AI Hallucinations in Histology</h3>
+                    <p class="bento-desc">
+                        Medical education demands absolute diagnostic fidelity. Every histology micrograph is extracted at 200–260 DPI directly from official Robbins Pathology PDF coordinates via PyMuPDF (<code>fitz</code>). Features true squamous pearls, pleomorphic adenomas, typical vs. atypical tripolar mitoses, and cervical carcinoma in situ (CIN III).
+                    </p>
+                </div>
+
+                <!-- Bento 4: Engineering Pipeline -->
+                <div class="bento-card bento-col-6">
+                    <span class="bento-badge"><i class="fa-solid fa-laptop-code"></i> Engineering Innovation</span>
+                    <h3 class="bento-title">Fluid Editorial Textbook Architecture</h3>
+                    <p class="bento-desc">
+                        Transformed rigid boxed cards into a breathable, magazine-grade editorial typography system. Employs CSS Paged Media <code>@page { margin: 10mm 12mm; }</code> with full-bleed cover art, offline Base64 data URIs, dynamic aspect ratio containers, and KaTeX mathematical biochemical formatting.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download & Editions Hub -->
+        <section class="download-hub" id="downloads">
+            <div class="section-header-block" style="margin-bottom: 10px;">
+                <div>
+                    <span class="section-label"><i class="fa-solid fa-box-archive"></i> Publications & Repositories</span>
+                    <h2 class="section-heading">Download Textbook Editions</h2>
+                </div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Prepared for Academic & Portfolio Evaluation
+                </div>
+            </div>
+
+            <div class="download-grid">
+                <!-- Complete Edition -->
+                <div class="download-card">
+                    <div>
+                        <div class="download-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <h3 class="download-title">Complete Illustrated Edition</h3>
+                        <div class="download-meta">Robbins Basic Pathology Ch. 6 • 47 Pages • 8.0 MB</div>
+                        <p class="download-desc">
+                            The definitive exhaustive edition. Includes all 37 authentic figures, full diagnostic criteria, biochemical mechanisms (Knudson Two-Hit, Warburg, p53, APC/Wnt), TNM staging, and tumor markers.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="pdf/neoplasia_complete_illustrated.pdf" download class="btn-pill btn-primary" style="flex: 1; justify-content: center;">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                        <a href="pdf/neoplasia_complete_illustrated.pdf" target="_blank" class="btn-pill btn-secondary" title="Preview in Browser">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fluid Editorial Summary -->
+                <div class="download-card">
+                    <div>
+                        <div class="download-icon" style="color: var(--accent-rose);"><i class="fa-solid fa-newspaper"></i></div>
+                        <h3 class="download-title">Fluid Editorial High-Yield Review</h3>
+                        <div class="download-meta">Robbins & Cotran Ch. 7 Summary • 17 Pages • 6.4 MB</div>
+                        <p class="download-desc">
+                            Concise, high-yield review edition built with unboxed editorial typography. Optimized for rapid USMLE Step 1 recall, clinical pearls, and high-frequency examination concepts.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="pdf/chapter7_pathology_deep_th.pdf" download class="btn-pill btn-cyan" style="flex: 1; justify-content: center;">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                        <a href="pdf/chapter7_pathology_deep_th.pdf" target="_blank" class="btn-pill btn-secondary" title="Preview in Browser">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Skill Specification -->
+                <div class="download-card">
+                    <div>
+                        <div class="download-icon" style="color: var(--accent-cyan);"><i class="fa-solid fa-file-code"></i></div>
+                        <h3 class="download-title">HTML-to-PDF Skill Specification</h3>
+                        <div class="download-meta">Restored 27-Section Publishing Standard • SKILL.md</div>
+                        <p class="download-desc">
+                            The complete specification file documenting the 27 golden design rules: zero-token layout audits, paged media, Base64 pipelines, and dynamic image aspect ratios.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/onlie-decoder/robbins-pathology-neoplasia/blob/main/skill/SKILL.md" target="_blank" class="btn-pill btn-secondary" style="width: 100%; justify-content: center;">
+                            <i class="fa-brands fa-github"></i> View SKILL.md on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Micrograph & Figure Gallery -->
+        <section id="gallery" style="margin-bottom: 70px;">
+            <div class="section-header-block">
+                <div>
+                    <span class="section-label"><i class="fa-solid fa-images"></i> Authentic Robbins Pathology Assets</span>
+                    <h2 class="section-heading">Interactive Micrograph & Pathway Gallery</h2>
+                </div>
+                
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All (37)</button>
+                    <button class="filter-btn" data-filter="histology">Histopathology</button>
+                    <button class="filter-btn" data-filter="molecular">Molecular Pathways</button>
+                    <button class="filter-btn" data-filter="invasion">Invasion & Immunity</button>
+                    <button class="filter-btn" data-filter="carcinogenesis">Carcinogenesis</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Gallery Grid -->
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Skill Architecture Showcase -->
+        <section class="skill-section" id="architecture">
+            <div class="section-header-block">
+                <div>
+                    <span class="section-label"><i class="fa-solid fa-gears"></i> Publishing Engine Architecture</span>
+                    <h2 class="section-heading">html-to-pdf-textbook Engine</h2>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                    27 Sections of High-Yield Design Engineering
+                </div>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card bento-col-4">
+                    <span class="bento-badge">RULE 18 & 21</span>
+                    <h4 class="bento-title">Sub-Pixel Vector Extraction</h4>
+                    <p class="bento-desc">
+                        PyMuPDF extracts raster micrographs and diagrams using exact bounding box points (<code>crop_coordinates_pt</code>), eliminating textbook margin bleed and column overflows.
+                    </p>
+                </div>
+
+                <div class="bento-card bento-col-4">
+                    <span class="bento-badge">RULE 23 & 25</span>
+                    <h4 class="bento-title">Paged Media Breathing Room</h4>
+                    <p class="bento-desc">
+                        <code>@page { margin: 10mm 12mm; }</code> combined with <code>@page :first { margin: 0; }</code> delivers full-bleed executive cover art on page 1 and pristine margin clearance on pages 2–47.
+                    </p>
+                </div>
+
+                <div class="bento-card bento-col-4">
+                    <span class="bento-badge">RULE 26</span>
+                    <h4 class="bento-title">Zero-Token Layout Audit</h4>
+                    <p class="bento-desc">
+                        Programmatic sub-second coordinate assertion inspects text block bottom coordinates, detecting stranded headings and orphaned tables in 0.1s without burning multimodal LLM tokens.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Code Window Preview -->
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <div class="code-dot dot-red"></div>
+                        <div class="code-dot dot-yellow"></div>
+                        <div class="code-dot dot-green"></div>
+                    </div>
+                    <div class="code-title">C:\Users\Asrock\.gemini\config\plugins\9arm-skills\skills\html-to-pdf-textbook\SKILL.md</div>
+                    <div style="color: var(--accent-emerald); font-size: 0.75rem;"><i class="fa-solid fa-shield-check"></i> Restored Clean Standard</div>
+                </div>
+                <div class="code-body">
+<span style="color: #64748B;">// Section 23: CSS Paged Media Top Page Breathing Margin & Full-Bleed Cover</span><br>
+<span style="color: #F43F5E;">@page</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #8B5CF6;">size</span>: A4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #8B5CF6;">margin</span>: 10mm 12mm 12mm 12mm;<br>
+}<br>
+<br>
+<span style="color: #F43F5E;">@page :first</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #8B5CF6;">margin</span>: 0mm !important;<br>
+}<br>
+<br>
+<span style="color: #64748B;">// Section 26: Programmatic Sub-Second Stranded Heading Audit</span><br>
+<span style="color: #00F2FE;">for</span> page_idx, page <span style="color: #00F2FE;">in</span> enumerate(doc):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;page_h = page.rect.height<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00F2FE;">for</span> block <span style="color: #00F2FE;">in</span> page.get_text(<span style="color: #F59E0B;">"blocks"</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00F2FE;">if</span> block[1] &gt; (page_h - 65) <span style="color: #00F2FE;">and</span> is_heading(block[4]):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #EF4444;">raise LayoutOrphanException(f"Stranded heading on page {page_idx+1}")</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-img-container">
+                <img src="" alt="" class="modal-img" id="modalImg">
+            </div>
+            <div class="modal-info">
+                <div>
+                    <div class="modal-badge-row">
+                        <span class="hero-badge" id="modalNum">Figure</span>
+                        <span class="brand-tag" id="modalType">Type</span>
+                    </div>
+                    <h3 class="modal-title" id="modalTitle">Title</h3>
+                    <p class="modal-caption" id="modalCaption">Caption</p>
+                </div>
+                <div class="modal-credit" id="modalCredit"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-author">
+                        <i class="fa-solid fa-stethoscope" style="color: var(--accent-rose); margin-right: 8px;"></i>
+                        Curated & Engineered by onlie-decoder
+                    </div>
+                    <p class="footer-note" style="margin-top: 8px;">
+                        Created for Academic Portfolio & Medical Study Submission. Grounded directly in Robbins Basic Pathology 10th Edition (Chapter 6) and Robbins & Cotran Pathologic Basis of Disease 10th Edition.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <a href="https://github.com/onlie-decoder/robbins-pathology-neoplasia" target="_blank" class="btn-pill btn-secondary">
+                        <i class="fa-brands fa-github"></i> Source Repository
+                    </a>
+                    <a href="pdf/neoplasia_complete_illustrated.pdf" download class="btn-pill btn-primary">
+                        <i class="fa-solid fa-file-pdf"></i> Download Full PDF
+                    </a>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.04); font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+                Robbins Pathology Portfolio Showcase • Generated with Antigravity & html-to-pdf-textbook Architecture
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gallery Rendering & Lightbox Script -->
+    <script>
+        const figures = [{"number": "Figure 6.1", "key": "6.1", "title": "Colonic polyp (adenoma)", "caption": "Fig. 6.1 Colonic polyp. This glandular neoplasm (adenoma) is projecting into the colonic lumen and is attached to the mucosa by a distinct stalk.", "credit": "", "type": "gross_pathology", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_1.png", "printed_page": 191}, {"number": "Figure 6.2", "key": "6.2", "title": "Mixed tumor of parotid gland (pleomorphic adenoma)", "caption": "Fig. 6.2 Mixed tumor of the parotid gland containing epithelial cells forming ducts and matrix resembling cartilage. (Courtesy of Dr. Arlene Perez, Department of Pathology, Brigham and Women's Hospital, Boston, Mass.)", "credit": "(Courtesy of Dr. Arlene Perez, Department of Pathology, Brigham and Women's Hospital, Boston, Mass.)", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_2.png", "printed_page": 191}, {"number": "Figure 6.3", "key": "6.3", "title": "Well-differentiated squamous cell carcinoma", "caption": "Fig. 6.3 Well-differentiated squamous cell carcinoma of the skin. The tumor cells are strikingly similar to normal squamous epithelial cells, with intercellular bridges and prominent 'pearls' of keratin (arrow).", "credit": "", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_3.png", "printed_page": 193}, {"number": "Figure 6.4", "key": "6.4", "title": "Pleomorphic malignant tumor (rhabdomyosarcoma)", "caption": "Fig. 6.4 Pleomorphic malignant tumor (rhabdomyosarcoma). The tumor cells are marked by wide variation in cell and nuclear size and shape, hyperchromatic prominent dark nuclei, and bizarre giant cells.", "credit": "", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_4.png", "printed_page": 193}, {"number": "Figure 6.5", "key": "6.5", "title": "High-power detailed view of anaplastic tumor with atypical mitoses", "caption": "Fig. 6.5 High-power detailed view of an anaplastic tumor showing marked cellular and nuclear pleomorphism, hyperchromatism, and an abnormal tripolar mitotic figure.", "credit": "", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_5.png", "printed_page": 193}, {"number": "Figure 6.6", "key": "6.6", "title": "Carcinoma in situ of the uterine cervix", "caption": "Fig. 6.6 Carcinoma in situ. (A) Low-power view shows that the entire thickness of the epithelium is replaced by atypical, dysplastic cells. There is no invasion of the underlying stroma. (B) High-power view demonstrating cellular atypia, hyperchromatism, and loss of normal architectural maturation.", "credit": "", "type": "composite_micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_6.png", "printed_page": 194}, {"number": "Figure 6.7", "key": "6.7", "title": "Fibroadenoma of the breast (gross)", "caption": "Fig. 6.7 Fibroadenoma of the breast. The tan-colored, encapsulated, sharply demarcated benign tumor is clearly distinct from the surrounding breast tissue.", "credit": "", "type": "gross_pathology", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_7.png", "printed_page": 194}, {"number": "Figure 6.8", "key": "6.8", "title": "Fibroadenoma of the breast (microscopic)", "caption": "Fig. 6.8 Microscopic view of fibroadenoma of the breast seen in Fig. 6.7. Note the fibrous capsule separating the tumor from the surrounding normal breast parenchyma.", "credit": "", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_8.png", "printed_page": 194}, {"number": "Figure 6.9", "key": "6.9", "title": "Invasive ductal carcinoma of the breast (gross)", "caption": "Fig. 6.9 Cut section of invasive ductal carcinoma of the breast. The lesion is infiltrative, retracting the nipple, and lacks a well-defined border or capsule.", "credit": "", "type": "gross_pathology", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_9.png", "printed_page": 195}, {"number": "Figure 6.10", "key": "6.10", "title": "Microscopic view of breast carcinoma showing infiltrative margin", "caption": "Fig. 6.10 Microscopic view of breast carcinoma seen in Fig. 6.9. Note the absence of a well-defined capsule and invasion into surrounding adipose tissue.", "credit": "", "type": "micrograph", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_10.png", "printed_page": 195}, {"number": "Figure 6.11", "key": "6.11", "title": "Liver studded with metastatic cancer", "caption": "Fig. 6.11 A liver studded with metastatic cancer. Multiple rounded nodules of varying sizes are scattered throughout the hepatic parenchyma.", "credit": "", "type": "gross_pathology", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_11.png", "printed_page": 195}, {"number": "Figure 6.12", "key": "6.12", "title": "Comparison of benign leiomyoma vs malignant leiomyosarcoma", "caption": "Fig. 6.12 Comparison between a benign tumor of the myometrium (leiomyoma) and a malignant tumor of similar origin (leiomyosarcoma).", "credit": "", "type": "comparative_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_12.png", "printed_page": 197}, {"number": "Figure 6.13", "key": "6.13", "title": "Estimated cancer incidence and mortality by site and sex", "caption": "Fig. 6.13 Estimated cancer incidence and mortality by site and sex in the United States. Excludes basal cell and squamous cell skin cancers and carcinoma in situ. (From Siegel RL, Miller KD, Jemal A: Cancer statistics, 2016. CA Cancer J Clin 66:7, 2016.)", "credit": "(From Siegel RL, Miller KD, Jemal A: Cancer statistics, 2016. CA Cancer J Clin 66:7, 2016.)", "type": "statistical_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_13.png", "printed_page": 198}, {"number": "Figure 6.14", "key": "6.14", "title": "Chromosomal translocations and associated oncogenes (CML and Burkitt lymphoma)", "caption": "Fig. 6.14 The chromosomal translocations and associated oncogenes in chronic myelogenous leukemia and Burkitt lymphoma.", "credit": "", "type": "molecular_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_14.png", "printed_page": 202}, {"number": "Figure 6.15", "key": "6.15", "title": "Amplification of the NMYC gene in human neuroblastoma", "caption": "Fig. 6.15 Amplification of the NMYC gene in human neuroblastoma. The NMYC gene, present normally on chromosome 2p, becomes amplified and is seen either as homogeneously staining regions (HSRs) or as double minutes.", "credit": "", "type": "molecular_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_15.png", "printed_page": 203}, {"number": "Figure 6.16", "key": "6.16", "title": "Stepwise accumulation of complementary driver mutations", "caption": "Fig. 6.16 Development of cancer through stepwise accumulation of complementary driver mutations. The order in which various driver mutations appear can vary across tumors.", "credit": "", "type": "pathway_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_16.png", "printed_page": 205}, {"number": "Figure 6.17", "key": "6.17", "title": "Eight cancer hallmarks and two enabling factors", "caption": "Fig. 6.17 Eight cancer hallmarks and two enabling factors (genomic instability and tumor-promoting inflammation). Most cancer cells acquire these properties during their development.", "credit": "", "type": "hallmark_wheel_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_17.png", "printed_page": 205}, {"number": "Figure 6.18", "key": "6.18", "title": "Model for action of RAS and downstream signaling", "caption": "Fig. 6.18 Model for action of RAS. When a normal cell is stimulated through a growth factor receptor, inactive (GDP-bound) RAS is activated to a GTP-bound state, initiating MAPK signaling.", "credit": "", "type": "molecular_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_18.png", "printed_page": 206}, {"number": "Figure 6.19", "key": "6.19", "title": "Pathogenesis of retinoblastoma (Knudson two-hit hypothesis)", "caption": "Fig. 6.19 Pathogenesis of retinoblastoma. Two mutations of the RB chromosomal locus on 13q14 lead to neoplastic proliferation of the retinal cells.", "credit": "", "type": "genetic_pathway_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_19.png", "printed_page": 209}, {"number": "Figure 6.20", "key": "6.20", "title": "The role of RB in regulating the G1-S checkpoint of the cell cycle", "caption": "Fig. 6.20 The role of RB in regulating the G1–S checkpoint of the cell cycle. Hypophosphorylated RB in complex with E2F transcription factors acts as a transcriptional repressor; hyperphosphorylation relieves this brake.", "credit": "", "type": "cell_cycle_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_20.png", "printed_page": 210}, {"number": "Figure 6.21", "key": "6.21", "title": "The role of p53 in maintaining genome integrity", "caption": "Fig. 6.21 The role of p53 in maintaining the integrity of the genome. Activation of normal p53 by DNA-damaging agents leads to cell cycle arrest (quiescence), DNA repair, or apoptosis (senescence/death).", "credit": "", "type": "p53_guardian_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_21.png", "printed_page": 212}, {"number": "Figure 6.22", "key": "6.22", "title": "The role of APC in regulating beta-catenin and WNT signaling", "caption": "Fig. 6.22 The role of APC in regulating the stability and function of β-catenin. APC and β-catenin are components of the WNT signaling pathway. In quiescent cells, APC causes degradation of β-catenin.", "credit": "", "type": "wnt_apc_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_22.png", "printed_page": 214}, {"number": "Figure 6.23", "key": "6.23", "title": "Metabolism and cell growth: Warburg effect (aerobic glycolysis)", "caption": "Fig. 6.23 Metabolism and cell growth. Quiescent cells rely mainly on the Krebs cycle for ATP production. Cancer cells upregulate aerobic glycolysis (the Warburg effect) to provide metabolic intermediates for biomass assembly.", "credit": "", "type": "metabolism_warburg_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_23.png", "printed_page": 215}, {"number": "Figure 6.24", "key": "6.24", "title": "Proposed action of oncometabolite 2-HG in IDH-mutated cancers", "caption": "Fig. 6.24 Proposed action of the oncometabolite 2-hydroxyglutarate (2-HG) in cancer cells with mutated isocitrate dehydrogenase (mIDH). 2-HG inhibits enzymes that regulate DNA methylation.", "credit": "", "type": "oncometabolite_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_24.png", "printed_page": 216}, {"number": "Figure 6.25", "key": "6.25", "title": "Intrinsic pathway of apoptosis and evasion mechanisms in cancer", "caption": "Fig. 6.25 Intrinsic pathway of apoptosis and major mechanisms used by tumor cells to evade cell death. (1) Loss of p53; (2) Overexpression of anti-apoptotic BCL2 family members.", "credit": "", "type": "apoptosis_pathway_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_25.png", "printed_page": 217}, {"number": "Figure 6.26", "key": "6.26", "title": "Telomere shortening, crisis, and bridge-fusion-breakage cycle", "caption": "Fig. 6.26 Escape of cells from replicative senescence and mitotic catastrophe caused by telomere shortening, leading to reactivated telomerase in human carcinoma.", "credit": "", "type": "telomere_crisis_diagram", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_26.png", "printed_page": 219}, {"number": "Figure 6.27", "key": "6.27", "title": "The metastatic cascade: sequential steps in hematogenous tumor spread", "caption": "Fig. 6.27 The metastatic cascade: The sequential steps involved in the hematogenous spread of a tumor.", "credit": "", "type": "metastatic_cascade_diagram", "cat_key": "invasion", "cat_name": "Invasion & Immunity", "src": "assets/fig_6_27.png", "printed_page": 221}, {"number": "Figure 6.28", "key": "6.28", "title": "Invasion of epithelial basement membranes by tumor cells", "caption": "Fig. 6.28 Sequence of events in the invasion of epithelial basement membranes by tumor cells: (A) Loosening of intercellular junctions; (B) Degradation of ECM; (C) Migration and invasion.", "credit": "", "type": "ecm_invasion_diagram", "cat_key": "invasion", "cat_name": "Invasion & Immunity", "src": "assets/fig_6_28.png", "printed_page": 221}, {"number": "Figure 6.29", "key": "6.29", "title": "Cross-presentation of tumor antigens and CD8+ T cell response", "caption": "Fig. 6.29 Cross-presentation of tumor antigens and induction of CD8+ cytotoxic T cell antitumor response. (Modified from Abbas AK, Lichtman AH, Pillai S: Cellular and Molecular Immunology, ed 8. Philadelphia, Elsevier, 2015.)", "credit": "(Modified from Abbas AK, Lichtman AH, Pillai S: Cellular and Molecular Immunology, ed 8. Philadelphia, Elsevier, 2015.)", "type": "immune_crosspresentation_diagram", "cat_key": "invasion", "cat_name": "Invasion & Immunity", "src": "assets/fig_6_29.png", "printed_page": 225}, {"number": "Figure 6.30", "key": "6.30", "title": "Activation of host antitumor immunity by checkpoint inhibitors", "caption": "Fig. 6.30 Activation of host antitumor immunity by checkpoint inhibitors. (A) Blockade of the CTLA4 surface molecule with an inhibitor antibody removes inhibitory signals to cytotoxic T cells. (B) Blockade of PD-1 / PD-L1 interaction restores T-cell antitumor cytotoxic activity.", "credit": "", "type": "checkpoint_inhibitor_diagram", "cat_key": "invasion", "cat_name": "Invasion & Immunity", "src": "assets/fig_6_30.png", "printed_page": 226}, {"number": "Figure 6.31", "key": "6.31", "title": "Therapeutic targeting of the hallmarks of cancer", "caption": "Fig. 6.31 Therapeutic targeting of the hallmarks of cancer. (From Hanahan D, Weinberg RA: The hallmarks of cancer: the next generation. Cell 144:646, 2011.)", "credit": "(From Hanahan D, Weinberg RA: The hallmarks of cancer: the next generation. Cell 144:646, 2011.)", "type": "hallmark_therapeutics_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_31.png", "printed_page": 229}, {"number": "Figure 6.32", "key": "6.32", "title": "General schema of events in chemical carcinogenesis", "caption": "Fig. 6.32 General schema of events in chemical carcinogenesis. Note that promoters cause clonal expansion of the initiated cell, thus producing a preneoplastic clone.", "credit": "", "type": "chemical_carcinogenesis_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_32.png", "printed_page": 230}, {"number": "Figure 6.33", "key": "6.33", "title": "Transforming effects of HPV E6 and E7 proteins", "caption": "Fig. 6.33 Transforming effects of HPV E6 and E7 proteins. The net effect is to immortalize cells and remove restraints on cell proliferation by binding and degrading p53 and RB.", "credit": "", "type": "hpv_e6_e7_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_33.png", "printed_page": 232}, {"number": "Figure 6.34", "key": "6.34", "title": "Evolution of EBV-induced Burkitt lymphoma", "caption": "Fig. 6.34 Possible evolution of EBV-induced Burkitt lymphoma. Latent infection leads to polyclonal B-cell expansion, acquisition of t(8;14) translocation, and MYC activation.", "credit": "", "type": "ebv_burkitt_diagram", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_34.png", "printed_page": 233}, {"number": "Figure 6.35", "key": "6.35", "title": "Papanicolaou (Pap) smear of the uterine cervix: normal vs abnormal", "caption": "Fig. 6.35 (A) Normal Papanicolaou smear from the uterine cervix. Large, flat cells with small nuclei are typical. (B) Abnormal smear containing undifferentiated cervical cancer cells with large, hyperchromatic, pleomorphic nuclei.", "credit": "", "type": "pap_smear_cytology", "cat_key": "histology", "cat_name": "Histopathology", "src": "assets/fig_6_35.png", "printed_page": 238}, {"number": "Figure 6.36", "key": "6.36", "title": "Diverse tumor types sharing BRAF V600E mutation", "caption": "Fig. 6.36 Diverse tumor types that share a common mutation, BRAF (V600E), may be candidates for treatment with the same BRAF inhibitors.", "credit": "", "type": "braf_mutation_composite", "cat_key": "molecular", "cat_name": "Molecular Pathways", "src": "assets/fig_6_36.png", "printed_page": 240}, {"number": "Figure 6.37", "key": "6.37", "title": "Genetic analysis of cancers for targeted therapy pipeline", "caption": "Fig. 6.37 Genetic analysis of cancers is being utilized to identify mutations that can be targeted by drugs. In this workflow, targeted sequencing identifies actionable alterations.", "credit": "", "type": "targeted_therapy_pipeline", "cat_key": "carcinogenesis", "cat_name": "Carcinogenesis & Therapy", "src": "assets/fig_6_37.png", "printed_page": 241}];
+
+        const galleryContainer = document.getElementById('galleryContainer');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCaption = document.getElementById('modalCaption');
+        const modalNum = document.getElementById('modalNum');
+        const modalType = document.getElementById('modalType');
+        const modalCredit = document.getElementById('modalCredit');
+        const modalClose = document.getElementById('modalClose');
+
+        function renderGallery(filter = 'all') {
+            galleryContainer.innerHTML = '';
+            const filtered = filter === 'all' 
+                ? figures 
+                : figures.filter(f => f.cat_key === filter);
+
+            filtered.forEach(fig => {
+                const card = document.createElement('div');
+                card.className = 'figure-card';
+                card.innerHTML = `
+                    <div class="figure-thumb-wrap">
+                        <span class="figure-badge-overlay">${fig.number}</span>
+                        <span class="figure-type-overlay">${fig.cat_name}</span>
+                        <img src="${fig.src}" alt="${fig.title}" class="figure-thumb" loading="lazy">
+                    </div>
+                    <div class="figure-content">
+                        <div>
+                            <h4 class="figure-title">${fig.title}</h4>
+                            <p class="figure-caption-snippet">${fig.caption}</p>
+                        </div>
+                        <div class="figure-card-footer">
+                            <span>Printed Page ${fig.printed_page}</span>
+                            <span class="inspect-link">Inspect <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(fig));
+                galleryContainer.appendChild(card);
+            });
+        }
+
+        function openModal(fig) {
+            modalImg.src = fig.src;
+            modalTitle.textContent = fig.title;
+            modalCaption.textContent = fig.caption;
+            modalNum.textContent = fig.number;
+            modalType.textContent = fig.cat_name;
+            modalCredit.textContent = fig.credit ? fig.credit : 'Robbins Basic Pathology 10th Edition';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderGallery(btn.getAttribute('data-filter'));
+            });
+        });
+
+        // Initialize gallery
+        renderGallery('all');
+
+        // Render math if any
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        });
+    </script>
+</body>
+</html>
