@@ -287,13 +287,424 @@ main::before {
   position: relative;
   z-index: 3;
 }
+
+
+/* 3D Depth & Dynamic Orbit Styles */
+.orbit {
+  height: 480px;
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  perspective: 1200px;
+}
+
+.orbit-lines-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Background orbital ring */
+.orbit-ambient-ring {
+  fill: none;
+  stroke: rgba(139, 92, 246, 0.15);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 8;
+  animation: orbit-ring-spin 60s linear infinite;
+  transform-origin: 250px 235px;
+}
+
+@keyframes orbit-ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Dynamic connecting strings */
+.orbit-string-glow {
+  fill: none;
+  stroke-width: 5;
+  opacity: 0.4;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+  stroke-linecap: round;
+  transition: stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.orbit-string-core {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 6 6;
+  animation: string-dash-flow 25s linear infinite;
+}
+
+@keyframes string-dash-flow {
+  to { stroke-dashoffset: -200; }
+}
+
+/* Orbit Core in center */
+.orbit-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #9cabc0;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+  text-align: center;
+}
+
+.orbit-core-nucleus {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(168, 85, 247, 0.25), rgba(15, 23, 42, 0.8) 80%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 0 12px rgba(168, 85, 247, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  animation: core-breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes core-breathe {
+  0% { transform: scale(0.95); box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+  100% { transform: scale(1.05); box-shadow: 0 0 28px rgba(168, 85, 247, 0.45); }
+}
+
+.orbit-core-nucleus span {
+  font-size: 24px;
+  color: #c084fc;
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.7);
+  display: inline-block;
+  animation: core-spin-slow 20s linear infinite;
+}
+
+@keyframes core-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.orbit-core small {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Floating Spherical 3D Nodes */
+.orbit-node {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  z-index: 5;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform, box-shadow;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Depth bevel & inner specular highlights */
+.orbit-node::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.04) 42%, rgba(0, 0, 0, 0.45) 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient glow rim */
+.orbit-node::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.6));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.orbit-node > * {
+  position: relative;
+  z-index: 3;
+}
+
+.node-number {
+  font: 11px var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.orbit-node strong {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.orbit-node small {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #cbd5e1;
+  line-height: 1.3;
+}
+
+.node-arrow {
+  font-size: 16px;
+  margin-top: 5px;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Node 01: SKILL.md (Emerald / Cyber Cyan) --- */
+.node-skill {
+  left: 50%;
+  top: 19%;
+  width: 172px;
+  height: 172px;
+  background: radial-gradient(circle at 35% 30%, #152b29, #0a1716 70%, #050d0c 100%);
+  border: 1px solid rgba(108, 248, 218, 0.4);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8),
+              0 0 30px rgba(108, 248, 218, 0.2),
+              inset 0 0 25px rgba(108, 248, 218, 0.12);
+  animation: float-drift-1 6.2s ease-in-out infinite alternate;
+}
+.node-skill .node-number { color: #6cf8da; border-color: rgba(108, 248, 218, 0.25); }
+.node-skill .node-arrow { color: #6cf8da; }
+
+/* --- Node 02: ผลงานล่าสุด (Electric Violet / Rose Magenta) --- */
+.node-work {
+  left: 20%;
+  top: 71%;
+  width: 162px;
+  height: 162px;
+  background: radial-gradient(circle at 35% 30%, #28173d, #140b20 70%, #0a0512 100%);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8),
+              0 0 35px rgba(168, 85, 247, 0.22),
+              inset 0 0 25px rgba(168, 85, 247, 0.14);
+  animation: float-drift-2 6.8s ease-in-out infinite alternate;
+}
+.node-work .node-number { color: #c084fc; border-color: rgba(168, 85, 247, 0.25); }
+.node-work .node-arrow { color: #c084fc; }
+
+/* --- Node 03: Roadmap (Sky Blue / Cobalt) --- */
+.node-learn {
+  left: 80%;
+  top: 71%;
+  width: 162px;
+  height: 162px;
+  background: radial-gradient(circle at 35% 30%, #15273d, #0b1522 70%, #050a12 100%);
+  border: 1px solid rgba(101, 191, 255, 0.4);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8),
+              0 0 30px rgba(101, 191, 255, 0.2),
+              inset 0 0 25px rgba(101, 191, 255, 0.12);
+  animation: float-drift-3 5.8s ease-in-out infinite alternate;
+}
+.node-learn .node-number { color: #60a5fa; border-color: rgba(96, 165, 250, 0.25); }
+.node-learn .node-arrow { color: #60a5fa; }
+
+/* Floating idle harmonic drift animations (Subtle 3D / floating left-right) */
+@keyframes float-drift-1 {
+  0% {
+    transform: translate(-50%, -50%) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(5px, -8px, 12px) rotate(0.8deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate3d(-5px, 6px, -8px) rotate(-0.8deg);
+  }
+}
+
+@keyframes float-drift-2 {
+  0% {
+    transform: translate(-50%, -50%) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(-7px, 6px, 10px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate3d(6px, -5px, -6px) rotate(1deg);
+  }
+}
+
+@keyframes float-drift-3 {
+  0% {
+    transform: translate(-50%, -50%) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(6px, 7px, -10px) rotate(1deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate3d(-6px, -7px, 8px) rotate(-0.8deg);
+  }
+}
+
+/* Mouse Hover: เลี้ยงแสง (Nourish / Bloom Light) without aggressive mouse jerk */
+.node-skill:hover {
+  border-color: #6cf8da !important;
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.9),
+              0 0 55px rgba(108, 248, 218, 0.65),
+              0 0 100px rgba(108, 248, 218, 0.3),
+              inset 0 0 35px rgba(108, 248, 218, 0.4) !important;
+  background: radial-gradient(circle at 35% 30%, #1e3f3c, #0f2422 70%, #071312 100%) !important;
+}
+
+.node-work:hover {
+  border-color: #d8b4fe !important;
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.9),
+              0 0 60px rgba(168, 85, 247, 0.7),
+              0 0 110px rgba(168, 85, 247, 0.35),
+              inset 0 0 35px rgba(168, 85, 247, 0.45) !important;
+  background: radial-gradient(circle at 35% 30%, #3d215e, #201134 70%, #10081a 100%) !important;
+}
+
+.node-learn:hover {
+  border-color: #93c5fd !important;
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.9),
+              0 0 55px rgba(101, 191, 255, 0.65),
+              0 0 100px rgba(101, 191, 255, 0.3),
+              inset 0 0 35px rgba(101, 191, 255, 0.4) !important;
+  background: radial-gradient(circle at 35% 30%, #1d395a, #102135 70%, #07101b 100%) !important;
+}
+
+.orbit-node:hover .node-arrow {
+  transform: translate(2px, -2px) scale(1.15);
+}
+
+/* Click Warp Action Animation */
+@keyframes node-warp-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: brightness(1);
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(0.92);
+    filter: brightness(1.8) drop-shadow(0 0 40px #fff);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.12);
+    filter: brightness(2) drop-shadow(0 0 60px #fff);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: brightness(1);
+  }
+}
+
+.orbit-node.is-warping {
+  animation: node-warp-pulse 0.42s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .orbit {
+    width: min(480px, 100%);
+    margin: auto;
+    height: 440px;
+  }
+  .orbit-node {
+    width: 142px;
+    height: 142px;
+    padding: 10px;
+  }
+  .node-skill {
+    width: 154px;
+    height: 154px;
+    top: 18%;
+  }
+  .node-work { left: 22%; top: 72%; }
+  .node-learn { left: 78%; top: 72%; }
+  .orbit-node strong { font-size: 16px; }
+  .orbit-node small { font-size: 10px; }
+}
+
+@media (max-width: 420px) {
+  .orbit {
+    height: 380px;
+  }
+  .orbit-node {
+    width: 122px;
+    height: 122px;
+    padding: 8px;
+  }
+  .node-skill {
+    width: 134px;
+    height: 134px;
+    top: 17%;
+  }
+  .node-work { left: 21%; top: 74%; }
+  .node-learn { left: 79%; top: 74%; }
+  .orbit-node strong { font-size: 14px; }
+  .orbit-node small { font-size: 9px; }
+  .node-number { font-size: 9px; margin-bottom: 2px; }
+}
+
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" class="icon-definitions" aria-hidden="true"><defs><symbol id="rm-folder" viewBox="0 0 24 24"><path d="M3 7V5a1 1 0 0 1 1-1h5l2 3h9a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z"/><path d="M3 9h18"/></symbol><symbol id="rm-books" viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16 5l4-1 3 15-4 1z"/></symbol><symbol id="rm-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol><symbol id="rm-dna" viewBox="0 0 24 24"><path d="M6 3c0 9 12 9 12 18M18 3c0 9-12 9-12 18M7 5h10M9 9h6M9 15h6M7 19h10"/></symbol><symbol id="rm-microbe" viewBox="0 0 24 24"><rect x="7" y="5" width="10" height="14" rx="5"/><path d="M9 3 10 5M15 3 14 5M4 8h3M17 8h3M3 13h4M17 13h4M5 19l3-3M16 16l3 3M12 9v1M12 14v1"/></symbol><symbol id="rm-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3Z"/><path d="m8 12 3 3 5-6"/></symbol><symbol id="rm-drop" viewBox="0 0 24 24"><path d="M12 3c-2 4-7 8-7 12a7 7 0 0 0 14 0c0-4-5-8-7-12Z"/><path d="M8 15c0 2 1 3 3 3"/></symbol><symbol id="rm-pulse" viewBox="0 0 24 24"><path d="M2 12h5l3-8 4 16 3-8h5"/></symbol><symbol id="rm-flame" viewBox="0 0 24 24"><path d="M12 3c1 5-4 6-3 10 2-1 4-3 4-5 3 3 6 6 5 9a6 6 0 0 1-12-1c0-5 4-7 6-13Z"/></symbol><symbol id="rm-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/></symbol><symbol id="rm-cell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M7 7h.01M17 9h.01M8 17h.01M17 16h.01"/></symbol><symbol id="rm-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol><symbol id="rm-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></symbol><symbol id="rm-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 11h18M7 15h2M13 15h2"/></symbol></defs></svg>
 <a class="skip" href="#overview">ข้ามไปเนื้อหา</a><div class="progress" aria-hidden="true"></div>
 <aside class="sidebar"><a class="brand" href="#overview">HTML <span>→</span> PDF<span>.</span><small>หลักการ / ผลงาน / บทเรียน</small></a><nav class="main-nav" aria-label="เมนูหลัก"><a href="#overview" class="active"><span>00</span> ภาพรวม</a><a href="#skill"><span>01</span> รู้จัก SKILL.md</a><a href="#roadmap"><span>02</span> Roadmap ผลงาน</a></nav><div class="toc-scroll"><details class="toc-group"><summary>SKILL.md · เปิดดูได้ ไม่จำเป็นต่อการตรวจ</summary><nav class="principle-toc" aria-label="สารบัญหลักการ"><a href="#principle-01"><span>01</span>เลือกภาพจากสิ่งที่ต้องการสอน</a><a href="#principle-02"><span>02</span>ฝังภาพไว้กับเอกสาร ไม่ฝากไว้กับเครือข่าย</a><a href="#principle-03"><span>03</span>ใช้สีให้สัมพันธ์กับเนื้อหาของบท</a><a href="#principle-04"><span>04</span>ให้ปกทำหน้าที่แนะนำทั้งเล่ม</a><a href="#principle-05"><span>05</span>ควบคุมขอบกระดาษและตำแหน่ง bullet</a><a href="#principle-06"><span>06</span>แยกสีและตารางของหน้าจอออกจากงานพิมพ์</a><a href="#principle-07"><span>07</span>เว้นพื้นที่ภาพอย่างตั้งใจสำหรับใบงาน</a><a href="#principle-08"><span>08</span>รักษา backslash ของสูตรใน Python</a><a href="#principle-09"><span>09</span>สร้าง PDF ผ่านกระบวนการเรนเดอร์ที่ทำซ้ำได้</a><a href="#principle-10"><span>10</span>ตรวจจากเกณฑ์ที่ชัดเจน</a><a href="#principle-11"><span>11</span>แก้ขนาดฟอนต์ที่ไม่ยอมเปลี่ยนตาม body</a><a href="#principle-12"><span>12</span>ป้องกันตัวอักษรขาวหายบนพื้นขาว</a><a href="#principle-13"><span>13</span>จัดการชื่อเรื่องไล่สีใน PDF</a><a href="#principle-14"><span>14</span>ให้เนื้อหาไหลต่อ เพื่อลดหน้าที่ว่างเกินไป</a><a href="#principle-15"><span>15</span>แบ่งตารางตามความหมายก่อนแบ่งตามหน้า</a><a href="#principle-16"><span>16</span>กำหนดลำดับขนาดตัวอักษรเป็นระบบ</a><a href="#principle-17"><span>17</span>ลดกรอบ เพื่อให้เนื้อหาอ่านต่อเนื่อง</a><a href="#principle-18"><span>18</span>ดึงภาพจากตำราต้นฉบับอย่างแม่นยำ</a><a href="#principle-19"><span>19</span>วางภาพที่ต้องเปรียบเทียบไว้ข้างกัน</a><a href="#principle-20"><span>20</span>แยก template ออกจากการแทรกข้อมูล</a><a href="#principle-21"><span>21</span>ให้กรอบภาพปรับตามสัดส่วนต้นฉบับ</a><a href="#principle-22"><span>22</span>จับหัวข้อกับตารางให้เป็นหน่วยเดียวกัน</a><a href="#principle-23"><span>23</span>ให้ทุกหน้ามีพื้นที่หายใจ ไม่ใช่เฉพาะหน้าแรก</a><a href="#principle-24"><span>24</span>ไม่ทิ้งบรรทัดโดดเดี่ยวข้ามหน้า</a><a href="#principle-25"><span>25</span>ให้แผนภาพแนวตั้งอยู่ข้างคำอธิบาย</a><a href="#principle-26"><span>26</span>ตรวจเฉพาะสิ่งที่เปลี่ยน และใช้ข้อมูลช่วยตรวจ</a><a href="#principle-27"><span>27</span>จัดจังหวะทั้ง section และเก็บรายละเอียดภายใน</a></nav></details><details class="toc-group"><summary>Roadmap · ล่าสุด → เก่าสุด</summary><nav class="roadmap-toc" aria-label="สารบัญผลงาน"><a href="#roadmap-latest">ปัจจุบัน · Neoplasia + Genetic</a><a href="#roadmap-8">Chapter 8 · Infectious Diseases</a><a href="#roadmap-6">Chapter 6 · Immune System</a><a href="#roadmap-4">Chapter 4 · Hemodynamics</a><a href="#roadmap-11">Chapter 11 · Blood Vessels</a><a href="#roadmap-3">Chapter 3 · Inflammation</a><a href="#roadmap-2">Chapter 2 · Cell Injury</a><a href="#roadmap-1">Chapter 1 · Cellular Pathology</a></nav></details></div><div class="side-footer"><a href="https://github.com/onlie-decoder/robbins-pathology-neoplasia">Source on GitHub ↗</a></div></aside>
 <main><div class="wrap"><div class="topbar"><div class="siriraj-dedication"><img src="assets/siriraj-logo.jpg" alt="ตราคณะแพทยศาสตร์ศิริราชพยาบาล มหาวิทยาลัยมหิดล" width="68" height="68"><div><span class="dedication-label">PORTFOLIO FOR SIRIRAJ</span><strong>จัดทำเพื่อประกอบการสมัคร<br>คณะแพทยศาสตร์ศิริราชพยาบาลโดยเฉพาะ</strong></div></div><a class="review-shortcut" href="#roadmap-latest">ดูผลงานล่าสุด ↗</a></div>
 <section class="hero" id="overview"><div class="hero-grid"><div><div class="eyebrow">จากการทดลอง สู่ SKILL ที่พัฒนาต่อได้</div><h1>ผมกำลังจะ<br><span>present</span> อะไร</h1><p class="lead">เว็บไซต์นี้ถูกสร้างขึ้นมาเพื่ออธิบาย <strong>SKILL.md</strong> และวิวัฒนาการของการสรุป PDF ของผม</p><div class="actions"><a class="btn primary" href="#skill">รู้จักทั้ง 27 หลักการ <span>↗</span></a><a class="btn" href="#roadmap">ดูสิ่งที่เรียนรู้ ↓</a></div></div><div class="orbit" aria-label="เลือกสำรวจโครงการ 3 ส่วน">
-<svg class="orbit-lines" viewBox="0 0 500 450" aria-hidden="true"><circle cx="250" cy="231" r="153"/><path d="M250 80 L390 330 L110 330 Z"/></svg>
-<div class="orbit-core" aria-hidden="true"><span>↻</span><small>เรียนรู้ แล้วพัฒนาต่อ</small></div>
+<svg class="orbit-lines-svg" viewBox="0 0 500 450" aria-hidden="true">
+  <defs>
+    <linearGradient id="grad-skill-work" x1="50%" y1="20%" x2="20%" y2="70%">
+      <stop offset="0%" stop-color="#6cf8da" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="grad-work-learn" x1="20%" y1="70%" x2="80%" y2="70%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="grad-learn-skill" x1="80%" y1="70%" x2="50%" y2="20%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#6cf8da" />
+    </linearGradient>
+  </defs>
+  <circle class="orbit-ambient-ring" cx="250" cy="235" r="156" />
+  <path id="str-glow-1" class="orbit-string-glow str-1" stroke="url(#grad-skill-work)" />
+  <path id="str-core-1" class="orbit-string-core str-1" stroke="#6cf8da" />
+  <path id="str-glow-2" class="orbit-string-glow str-2" stroke="url(#grad-work-learn)" />
+  <path id="str-core-2" class="orbit-string-core str-2" stroke="#c084fc" />
+  <path id="str-glow-3" class="orbit-string-glow str-3" stroke="url(#grad-learn-skill)" />
+  <path id="str-core-3" class="orbit-string-core str-3" stroke="#60a5fa" />
+</svg>
+<div class="orbit-core" aria-hidden="true"><div class="orbit-core-nucleus"><span>↻</span></div><small>เรียนรู้ แล้วพัฒนาต่อ</small></div>
 <a class="orbit-node node-skill" href="#skill"><span class="node-number">01</span><strong>SKILL.md</strong><small>วิธีคิดที่สะสมไว้</small><span class="node-arrow" aria-hidden="true">↗</span></a>
 <a class="orbit-node node-work" href="#roadmap-latest"><span class="node-number">02</span><strong>ผลงานล่าสุด</strong><small>สิ่งที่ทำได้วันนี้</small><span class="node-arrow" aria-hidden="true">↗</span></a>
 <a class="orbit-node node-learn" href="#roadmap"><span class="node-number">03</span><strong>Roadmap</strong><small>ย้อนดูสิ่งที่เปลี่ยน</small><span class="node-arrow" aria-hidden="true">↗</span></a>
@@ -453,5 +864,143 @@ if(innerWidth<=800)document.querySelectorAll('.toc-group').forEach(d=>d.open=fal
   
   requestAnimationFrame(render);
 })();
+</script>
+<script id="orbit-3d-script">
+
+(function() {
+  const orbit = document.querySelector('.orbit');
+  if (!orbit) return;
+
+  // Replace default orbit-lines SVG with dynamic string SVG
+  let svg = orbit.querySelector('.orbit-lines-svg');
+  if (!svg) {
+    const oldSvg = orbit.querySelector('.orbit-lines');
+    if (oldSvg) oldSvg.remove();
+
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'orbit-lines-svg');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="grad-skill-work" x1="50%" y1="20%" x2="20%" y2="70%">
+          <stop offset="0%" stop-color="#6cf8da" />
+          <stop offset="100%" stop-color="#c084fc" />
+        </linearGradient>
+        <linearGradient id="grad-work-learn" x1="20%" y1="70%" x2="80%" y2="70%">
+          <stop offset="0%" stop-color="#c084fc" />
+          <stop offset="100%" stop-color="#60a5fa" />
+        </linearGradient>
+        <linearGradient id="grad-learn-skill" x1="80%" y1="70%" x2="50%" y2="20%">
+          <stop offset="0%" stop-color="#60a5fa" />
+          <stop offset="100%" stop-color="#6cf8da" />
+        </linearGradient>
+      </defs>
+      <circle class="orbit-ambient-ring" cx="250" cy="235" r="156" />
+      <path id="str-glow-1" class="orbit-string-glow" stroke="url(#grad-skill-work)" />
+      <path id="str-core-1" class="orbit-string-core" stroke="#6cf8da" />
+      <path id="str-glow-2" class="orbit-string-glow" stroke="url(#grad-work-learn)" />
+      <path id="str-core-2" class="orbit-string-core" stroke="#c084fc" />
+      <path id="str-glow-3" class="orbit-string-glow" stroke="url(#grad-learn-skill)" />
+      <path id="str-core-3" class="orbit-string-core" stroke="#60a5fa" />
+    `;
+    orbit.prepend(svg);
+  }
+
+  // Modernize orbit-core if needed
+  const core = orbit.querySelector('.orbit-core');
+  if (core && !core.querySelector('.orbit-core-nucleus')) {
+    core.innerHTML = `
+      <div class="orbit-core-nucleus"><span>↻</span></div>
+      <small>เรียนรู้ แล้วพัฒนาต่อ</small>
+    `;
+  }
+
+  const nSkill = orbit.querySelector('.node-skill');
+  const nWork = orbit.querySelector('.node-work');
+  const nLearn = orbit.querySelector('.node-learn');
+
+  const strGlow1 = svg.querySelector('#str-glow-1');
+  const strCore1 = svg.querySelector('#str-core-1');
+  const strGlow2 = svg.querySelector('#str-glow-2');
+  const strCore2 = svg.querySelector('#str-core-2');
+  const strGlow3 = svg.querySelector('#str-glow-3');
+  const strCore3 = svg.querySelector('#str-core-3');
+
+  function getCenter(el, parentRect) {
+    const r = el.getBoundingClientRect();
+    return {
+      x: (r.left + r.width / 2) - parentRect.left,
+      y: (r.top + r.height / 2) - parentRect.top
+    };
+  }
+
+  let startTime = performance.now();
+
+  function updateStrings(now) {
+    const oRect = orbit.getBoundingClientRect();
+    if (oRect.width > 0 && oRect.height > 0) {
+      svg.setAttribute('viewBox', `0 0 ${oRect.width} ${oRect.height}`);
+
+      const ring = svg.querySelector('.orbit-ambient-ring');
+      if (ring) {
+        ring.setAttribute('cx', oRect.width / 2);
+        ring.setAttribute('cy', oRect.height * 0.52);
+        ring.setAttribute('r', Math.min(oRect.width, oRect.height) * 0.34);
+      }
+
+      if (nSkill && nWork && nLearn) {
+        const p1 = getCenter(nSkill, oRect);
+        const p2 = getCenter(nWork, oRect);
+        const p3 = getCenter(nLearn, oRect);
+
+        const t = (now - startTime) * 0.002;
+        const sag1 = Math.sin(t) * 10;
+        const sag2 = Math.cos(t * 0.9) * 8;
+        const sag3 = Math.sin(t * 1.1 + 1) * 10;
+
+        const mid12 = { x: (p1.x + p2.x) / 2 - 12 + sag1, y: (p1.y + p2.y) / 2 + 10 };
+        const mid23 = { x: (p2.x + p3.x) / 2, y: (p2.y + p3.y) / 2 + 16 + sag2 };
+        const mid31 = { x: (p3.x + p1.x) / 2 + 12 - sag3, y: (p3.y + p1.y) / 2 + 10 };
+
+        const d1 = `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} Q ${mid12.x.toFixed(1)} ${mid12.y.toFixed(1)} ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        const d2 = `M ${p2.x.toFixed(1)} ${p2.y.toFixed(1)} Q ${mid23.x.toFixed(1)} ${mid23.y.toFixed(1)} ${p3.x.toFixed(1)} ${p3.y.toFixed(1)}`;
+        const d3 = `M ${p3.x.toFixed(1)} ${p3.y.toFixed(1)} Q ${mid31.x.toFixed(1)} ${mid31.y.toFixed(1)} ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}`;
+
+        strGlow1.setAttribute('d', d1);
+        strCore1.setAttribute('d', d1);
+        strGlow2.setAttribute('d', d2);
+        strCore2.setAttribute('d', d2);
+        strGlow3.setAttribute('d', d3);
+        strCore3.setAttribute('d', d3);
+      }
+    }
+
+    requestAnimationFrame(updateStrings);
+  }
+
+  requestAnimationFrame(updateStrings);
+
+  [nSkill, nWork, nLearn].forEach(node => {
+    if (!node) return;
+    node.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetHash = this.getAttribute('href');
+      const targetEl = document.querySelector(targetHash);
+      
+      this.classList.remove('is-warping');
+      void this.offsetWidth;
+      this.classList.add('is-warping');
+
+      setTimeout(() => {
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          history.pushState(null, '', targetHash);
+        }
+      }, 150);
+    });
+  });
+
+})();
+
 </script>
 </body></html>
