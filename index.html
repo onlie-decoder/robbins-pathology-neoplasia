@@ -1427,19 +1427,52 @@ function startAmbientLoop(element, draw) {
     const dirX = Math.cos(angle);
     const dirY = Math.sin(angle);
 
-    const startX = Math.random() * (width * 1.3) - width * 0.15;
+    const startX = Math.random() * (width * 1.35) - width * 0.18;
     const startY = Math.random() * (height * 0.45) - 30;
-    const speed = 11 + Math.random() * 8 + progress * 10;
-    const length = (120 + Math.random() * 100) * (0.8 + progress * 0.95);
+
+    // Size tiers: micro (delicate), medium (classic), and grand (fireball)
+    const tierRoll = Math.random();
+    let sizeTier = 'medium';
+    let baseWidth = 2.0;
+    let baseLength = 150;
+    let speed = 12 + Math.random() * 6;
+    let decay = 0.013 + Math.random() * 0.009;
+
+    if (tierRoll < 0.42) {
+      // 1. Delicate distant micro-streak (~42%)
+      sizeTier = 'micro';
+      baseWidth = 0.85 + Math.random() * 0.45;
+      baseLength = 65 + Math.random() * 45;
+      speed = 13 + Math.random() * 8;
+      decay = 0.018 + Math.random() * 0.012;
+    } else if (tierRoll < 0.85) {
+      // 2. Standard celestial streak (~43%)
+      sizeTier = 'medium';
+      baseWidth = 1.8 + Math.random() * 0.8;
+      baseLength = 140 + Math.random() * 70;
+      speed = 11 + Math.random() * 6;
+      decay = 0.012 + Math.random() * 0.008;
+    } else {
+      // 3. Grand fireball / hero meteor (~15%)
+      sizeTier = 'grand';
+      baseWidth = 3.4 + Math.random() * 1.4;
+      baseLength = 260 + Math.random() * 110;
+      speed = 14 + Math.random() * 8;
+      decay = 0.009 + Math.random() * 0.006;
+    }
+
+    const scrollBoost = 0.85 + progress * 0.85;
+    const length = baseLength * scrollBoost;
+    const width = baseWidth * (0.9 + progress * 0.5);
 
     const roll = Math.random();
     let color = '#ffffff';
     let glowColor = '#ffffff';
-    if (roll < 0.25) {
+    if (roll < 0.28) {
       color = '#fef08a'; glowColor = '#fbbf24'; // Golden Starlight
-    } else if (roll < 0.50) {
+    } else if (roll < 0.54) {
       color = '#e9d5ff'; glowColor = '#c084fc'; // Royal Celestial Violet
-    } else if (roll < 0.68 && progress > 0.40) {
+    } else if (roll < 0.72 && progress > 0.35) {
       color = '#a7f3d0'; glowColor = '#34d399'; // Emerald Calyx Starlight
     }
 
@@ -1451,10 +1484,11 @@ function startAmbientLoop(element, draw) {
       angle: angle,
       length: length,
       life: 1.0,
-      decay: 0.012 + Math.random() * 0.010,
+      decay: decay,
       color: color,
       glowColor: glowColor,
-      width: 1.4 + Math.random() * 0.9 + progress * 0.9
+      width: width,
+      tier: sizeTier
     };
   }
 
@@ -1676,17 +1710,34 @@ function startAmbientLoop(element, draw) {
         ctx.strokeStyle = grad;
         ctx.lineWidth = st.width;
         ctx.globalAlpha = Math.max(0, Math.min(1, st.life * (0.60 + scrollProgress * 0.40)));
+        const tierBlur = st.tier === 'grand' ? 24 : (st.tier === 'medium' ? 14 : 7);
         ctx.shadowColor = st.glowColor;
-        ctx.shadowBlur = 10 + 16 * scrollProgress;
+        ctx.shadowBlur = tierBlur + 14 * scrollProgress;
         ctx.stroke();
 
-        // Brilliant glowing spark head
-        ctx.beginPath();
-        ctx.arc(st.x, st.y, st.width * 1.35, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = '#ffffff';
-        ctx.shadowBlur = 12 + 10 * scrollProgress;
-        ctx.fill();
+        // Brilliant head rendering according to size tier
+        if (st.tier === 'grand') {
+          // Grand fireball: 4-pointed sparkle flare + luminous core
+          const flareR = st.width * 2.3;
+          drawStarShape(ctx, st.x, st.y, 4, flareR, flareR * 0.28, time * 2);
+          ctx.fillStyle = st.color;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.width * 1.1, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = 18;
+          ctx.fill();
+        } else {
+          // Circular radiant spark head (delicate micro or classic medium)
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.width * (st.tier === 'micro' ? 1.05 : 1.3), 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = st.tier === 'micro' ? 6 : 12;
+          ctx.fill();
+        }
         ctx.restore();
 
         return true;
