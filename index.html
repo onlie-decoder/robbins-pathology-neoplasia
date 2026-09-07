@@ -1483,6 +1483,8 @@ function startAmbientLoop(element, draw) {
   }
 
   let time = 0;
+  let isUnlocked = false;
+  let unlockStartTime = -100;
   function render() {
     time += motionPreference.matches ? 0 : 0.016;
     ctx.clearRect(0, 0, width, height);
@@ -1535,6 +1537,20 @@ function startAmbientLoop(element, draw) {
       lineOpacity = lineOpacity > 0.5 ? 1 : 0;
     }
 
+    // 3. Game Item Unlock / Milestone reveal trigger
+    // Triggers when constellation reaches full reveal on the blank page
+    if (lineOpacity > 0.90) {
+      if (!isUnlocked) {
+        isUnlocked = true;
+        unlockStartTime = time;
+      }
+    } else if (lineOpacity < 0.40) {
+      isUnlocked = false; // re-arm if scrolled back up
+    }
+
+    const unlockElapsed = time - unlockStartTime;
+    const isUnlocking = unlockElapsed >= 0 && unlockElapsed < 1.6 && !motionPreference.matches;
+
     // Ambient stars intensity fades in progressively with scroll
     const ambientSkyAlpha = Math.min(0.85, 0.25 + scrollProgress * 0.6);
 
@@ -1573,7 +1589,42 @@ function startAmbientLoop(element, draw) {
       height * (isMobile ? 0.44 : 0.45),
       isMobile ? 260 : 420
     );
-    const currentScale = baseScale;
+
+    // Elastic scale pop for constellation upon unlock (game item unlock feeling)
+    let unlockPop = 0;
+    if (isUnlocking) {
+      unlockPop = Math.sin(unlockElapsed * Math.PI * 2.8) * Math.exp(-unlockElapsed * 3.2) * 0.12;
+    }
+    const currentScale = baseScale * (1 + unlockPop);
+
+    // Celestial Unlock Shockwave Rings (radiating outward from center core)
+    if (isUnlocking) {
+      const waveSpeed = currentScale * 1.18;
+      const waveRadius = unlockElapsed * waveSpeed;
+      const decay = Math.max(0, 1 - unlockElapsed / 1.35);
+
+      // 1. Golden starlight burst shockwave
+      ctx.beginPath();
+      ctx.arc(cx, cy, waveRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = '#fef08a';
+      ctx.globalAlpha = 0.55 * decay;
+      ctx.lineWidth = Math.max(0.5, 3.5 * decay);
+      ctx.shadowColor = '#fbbf24';
+      ctx.shadowBlur = 20 * decay;
+      ctx.stroke();
+
+      // 2. Royal violet secondary aura wave
+      if (waveRadius > 28) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, waveRadius - 28, 0, Math.PI * 2);
+        ctx.strokeStyle = '#c084fc';
+        ctx.globalAlpha = 0.42 * decay;
+        ctx.lineWidth = Math.max(0.5, 2.2 * decay);
+        ctx.shadowColor = '#a855f7';
+        ctx.shadowBlur = 14 * decay;
+        ctx.stroke();
+      }
+    }
 
     const currentPositions = flowerStars.map((s, idx) => {
       s.skyX = (s.skyX + s.driftVx + width) % width;
@@ -1586,13 +1637,31 @@ function startAmbientLoop(element, draw) {
       const oscX = motionPreference.matches ? 0 : Math.sin(time * oscSpeed + oscPhase) * oscAmp;
       const oscY = motionPreference.matches ? 0 : Math.cos(time * oscSpeed * 0.85 + oscPhase) * oscAmp;
 
-      const targetX = cx + s.fx * currentScale + oscX;
-      const targetY = cy + s.fy * currentScale + oscY;
+      // Radial shockwave & bump calculation on unlock
+      let bumpIntensity = 0;
+      let bumpX = 0;
+      let bumpY = 0;
+      if (isUnlocking) {
+        const waveSpeed = currentScale * 1.18;
+        const waveRadius = unlockElapsed * waveSpeed;
+        const starDist = Math.hypot(s.fx * currentScale, s.fy * currentScale);
+        const distDiff = Math.abs(starDist - waveRadius);
+        if (distDiff < 55) {
+          const decay = Math.max(0, 1 - unlockElapsed / 1.35);
+          bumpIntensity = Math.cos((distDiff / 55) * (Math.PI / 2)) * decay;
+          const angle = Math.atan2(s.fy, s.fx);
+          bumpX = Math.cos(angle) * (8.5 * bumpIntensity);
+          bumpY = Math.sin(angle) * (8.5 * bumpIntensity);
+        }
+      }
+
+      const targetX = cx + s.fx * currentScale + oscX + bumpX;
+      const targetY = cy + s.fy * currentScale + oscY + bumpY;
 
       const curX = (1 - starProgress) * s.skyX + starProgress * targetX;
       const curY = (1 - starProgress) * s.skyY + starProgress * targetY;
 
-      return { x: curX, y: curY, s: s };
+      return { x: curX, y: curY, s: s, bumpIntensity: bumpIntensity };
     });
 
     // 3. Draw petal surface translucent washes (ONLY when close, increasing opacity)
@@ -1633,7 +1702,7 @@ function startAmbientLoop(element, draw) {
     }
 
     // 5. Draw stellar star nodes (star shapes, circles, varied sizes, and growth)
-    currentPositions.forEach(({ x, y, s }) => {
+    currentPositions.forEach(({ x, y, s, bumpIntensity }) => {
       const tw = 0.72 + 0.28 * Math.sin(time * s.twinkleSpeed * 60 + s.twinklePhase);
 
       // Dynamic growth calculation:
@@ -1643,6 +1712,10 @@ function startAmbientLoop(element, draw) {
         const pulse = motionPreference.matches ? 1 : (1 + 0.18 * Math.sin(time * s.growSpeed + s.growPhase));
         growthMultiplier = (1 + s.growFactor * starProgress) * (starProgress > 0.2 ? pulse : 1);
       }
+      // Apply unlock wave bump to star scale!
+      if (bumpIntensity > 0) {
+        growthMultiplier *= (1 + 0.90 * bumpIntensity);
+      }
 
       const targetRadius = s.size * 0.95 * growthMultiplier;
       const radius = (1 - starProgress) * s.skyR + starProgress * targetRadius;
@@ -1650,7 +1723,7 @@ function startAmbientLoop(element, draw) {
       ctx.fillStyle = starProgress > 0.4 ? s.color : '#ffffff';
       ctx.globalAlpha = (starProgress > 0.4 ? 0.96 : s.skyAlpha * ambientSkyAlpha) * tw;
       ctx.shadowColor = starProgress > 0.4 ? s.color : '#ffffff';
-      ctx.shadowBlur = (4 + 9 * starProgress) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1);
+      ctx.shadowBlur = (4 + 9 * starProgress + (bumpIntensity || 0) * 28) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1);
 
       // Render actual star shapes vs circles
       if (s.shapeType === 'star4') {
