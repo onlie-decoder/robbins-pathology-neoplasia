@@ -1422,6 +1422,42 @@ function startAmbientLoop(element, draw) {
   const COLOR_PURPLE = { r: 192, g: 132, b: 252 }; // Royal violet #c084fc
   const COLOR_YELLOW = { r: 253, g: 224, b: 71 };  // Radiant gold / yellow #fde047
 
+  function createShootingStar(progress, offsetDelay = 0) {
+    const angle = (Math.PI / 4) + (Math.random() - 0.5) * 0.38; // ~34° to ~56° diagonal angle
+    const dirX = Math.cos(angle);
+    const dirY = Math.sin(angle);
+
+    const startX = Math.random() * (width * 1.3) - width * 0.15;
+    const startY = Math.random() * (height * 0.45) - 30;
+    const speed = 11 + Math.random() * 8 + progress * 10;
+    const length = (120 + Math.random() * 100) * (0.8 + progress * 0.95);
+
+    const roll = Math.random();
+    let color = '#ffffff';
+    let glowColor = '#ffffff';
+    if (roll < 0.25) {
+      color = '#fef08a'; glowColor = '#fbbf24'; // Golden Starlight
+    } else if (roll < 0.50) {
+      color = '#e9d5ff'; glowColor = '#c084fc'; // Royal Celestial Violet
+    } else if (roll < 0.68 && progress > 0.40) {
+      color = '#a7f3d0'; glowColor = '#34d399'; // Emerald Calyx Starlight
+    }
+
+    return {
+      x: startX - dirX * (offsetDelay * speed * 60),
+      y: startY - dirY * (offsetDelay * speed * 60),
+      vx: dirX * speed,
+      vy: dirY * speed,
+      angle: angle,
+      length: length,
+      life: 1.0,
+      decay: 0.012 + Math.random() * 0.010,
+      color: color,
+      glowColor: glowColor,
+      width: 1.4 + Math.random() * 0.9 + progress * 0.9
+    };
+  }
+
   function initStars() {
     const maxCoreDist = 1.35;
 
@@ -1516,6 +1552,8 @@ function startAmbientLoop(element, draw) {
   let unlockStartTime = -100;
   let isCascadeTriggered = false;
   let cascadeStartTime = -100;
+  let shootingStars = [];
+  let nextShootingStarTime = 1.2;
 
   function render() {
     time += motionPreference.matches ? 0 : 0.016;
@@ -1603,6 +1641,57 @@ function startAmbientLoop(element, draw) {
         ctx.fill();
       }
     });
+
+    // 1.5 Draw falling / shooting stars in background (intensity scales with scrollProgress)
+    if (!motionPreference.matches) {
+      // Base interval scales down from ~6.5s (top of page) to ~0.75s (bottom blank page)
+      const baseInterval = 6.5 - scrollProgress * 5.75;
+      if (time >= nextShootingStarTime) {
+        shootingStars.push(createShootingStar(scrollProgress));
+        // At deeper scroll (>0.70), occasionally trigger a secondary twin shooting star (35% chance)
+        if (scrollProgress > 0.70 && Math.random() < 0.35) {
+          shootingStars.push(createShootingStar(scrollProgress, 0.12));
+        }
+        nextShootingStarTime = time + baseInterval * (0.65 + Math.random() * 0.7);
+      }
+
+      shootingStars = shootingStars.filter(st => {
+        st.x += st.vx;
+        st.y += st.vy;
+        st.life -= st.decay;
+        if (st.life <= 0) return false;
+
+        const tailX = st.x - Math.cos(st.angle) * st.length;
+        const tailY = st.y - Math.sin(st.angle) * st.length;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, st.x, st.y);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        grad.addColorStop(0.65, st.color);
+        grad.addColorStop(1, '#ffffff');
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(st.x, st.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = st.width;
+        ctx.globalAlpha = Math.max(0, Math.min(1, st.life * (0.60 + scrollProgress * 0.40)));
+        ctx.shadowColor = st.glowColor;
+        ctx.shadowBlur = 10 + 16 * scrollProgress;
+        ctx.stroke();
+
+        // Brilliant glowing spark head
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.width * 1.35, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 12 + 10 * scrollProgress;
+        ctx.fill();
+        ctx.restore();
+
+        return true;
+      });
+    }
 
     // 2. Compute flower constellation coordinates
     // Pure grand flower taking up the whole page, centered vertically and horizontally
