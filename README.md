@@ -1,39 +1,91 @@
 # Robbins Basic Pathology Summaries & Illustrated Textbooks Series
+### แฟ้มสะสมผลงานวิชาการ: วิวัฒนาการการสังเคราะห์ตำราพยาธิวิทยาเชิงลึกสู่รูปแบบ High-Yield Illustrated Edition
+> **จัดทำเพื่อประกอบการพิจารณาคัดเลือกเข้าศึกษาต่อ คณะแพทยศาสตร์ศิริราชพยาบาล มหาวิทยาลัยมหิดล**  
+> โดย [onlie-decoder](https://github.com/onlie-decoder)
 
-An independent academic portfolio by [onlie-decoder](https://github.com/onlie-decoder), presenting AI-assisted pathology summaries and illustrated learning materials. The author's workflow uses LangChain for summarization; this repository contains published artifacts and the website, not a runnable LangChain application.
+---
 
-**[Open the live portfolio](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)**
+[![Live Portfolio](https://img.shields.io/badge/Website-Live%20Portfolio%20Siriraj-10b981?style=for-the-badge&logo=googlechrome&logoColor=white)](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)
+[![Target Faculty](https://img.shields.io/badge/Faculty-Faculty%20of%20Medicine%20Siriraj%20Hospital-eab308?style=for-the-badge)](https://www.si.mahidol.ac.th/)
+[![Curriculum](https://img.shields.io/badge/Focus-Pathology%20%7C%20Robbins%2010th%20Ed-8b5cf6?style=for-the-badge)](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)
 
-## Featured edition
+🌐 **เข้าสู่เว็บไซต์นำเสนอผลงานฉบับสมบูรณ์ (Live Portfolio):**  
+👉 **[https://onlie-decoder.github.io/robbins-pathology-neoplasia/](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)**
 
-**Chapter 6 — Neoplasia: 17-Page High-Yield Complete Illustrated Edition**
+---
 
-[Download the 17-page PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf)
+## 🩺 คำกราบเรียนคณะกรรมการและคณาจารย์ผู้ตรวจแฟ้มสะสมผลงาน
 
-- Verified 17 A4 pages with 15 pathology images and molecular diagrams.
-- Covers 8 cancer hallmarks and 2 enabling characteristics as organized in the actual PDF, plus grading and TNM staging.
-- Gallery images are extracted directly from this edition without resampling. Figure titles and numbers follow the PDF's Chapter 7 source numbering; the portfolio retains Chapter 6 as the special-edition label.
-- Fluid editorial layout, KaTeX typesetting, and Chromium-based publishing.
+กราบเรียนคณะกรรมการผู้ทรงคุณวุฒิและคณาจารย์ประจำคณะแพทยศาสตร์ศิริราชพยาบาลทุกท่าน
 
-## Complete library
+พื้นที่จัดเก็บเอกสารและซอร์สโค้ด (GitHub Repository) แห่งนี้ ถูกสร้างขึ้นเพื่อแสดง **วิวัฒนาการและกระบวนการเรียนรู้ด้วยตนเอง** ในการศึกษาพยาธิวิทยาการแพทย์ ผ่านการสังเคราะห์เนื้อหาจากตำรามาตรฐานระดับโลก *Robbins Basic Pathology* (10th Edition) ควบคู่กับการพัฒนาระบบอัตโนมัติ (AI Harness & HTML-to-PDF Typesetting Engine) เพื่อแปรรูปเนื้อหาพยาธิวิทยาที่ซับซ้อนให้กลายเป็นตำราสรุปเชิงภาพประกอบที่อ่านง่าย ถูกต้องตามหลักวิชาการ และเอื้อต่อการทบทวนอย่างมีประสิทธิภาพสูงสุด
 
-| Chapter | Edition | Pages | Download |
-| --- | --- | --- | --- |
-| 1 | The Genome and Cellular Pathology | 12 | [PDF](pdf/chapter1_pathology_deep_th.pdf) |
-| 2 | Cell Injury, Death, and Adaptations | 10 | [PDF](pdf/chapter2_pathology_deep_th.pdf) |
-| 3 | Inflammation and Tissue Repair | 11 | [PDF](pdf/chapter3_pathology_deep_th.pdf) |
-| 4 | Hemodynamic Disorders, Thromboembolism & Shock | 8 | [PDF](pdf/chapter4_pathology_deep_th.pdf) |
-| 5 | Genetic and Pediatric Diseases | 11 | [PDF](pdf/chapter5_pathology_deep_th.pdf) |
-| 6 | Diseases of the Immune System | 8 | [PDF](pdf/chapter6_pathology_deep_th.pdf) |
-| 6 — Special | Neoplasia, High-Yield Fluid Edition | 17 | [PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf) |
-| 11 | Blood Vessels & Vascular Pathology | 7 | [PDF](pdf/chapter11_pathology_deep_th.pdf) |
+### ข้อแนะนำในการตรวจเยี่ยมชมผลงาน
+1. **ผลงานตัวแทนระดับสูงสุดในปัจจุบัน (Current Breakthrough Iteration):** ขอเรียนเชิญตรวจเยี่ยม **Chapter 6: Neoplasia (ฉบับสมบูรณ์ 17 หน้า)** ซึ่งรวบรวมภาพจุลพยาธิวิทยา (Micrographs) และแผนภาพชีวเคมีระดับโมเลกุลของแท้จาก Robbins รวม 15 ภาพ พร้อมระบบจัดวางสองคอลัมน์และตารางเปรียบเทียบลักษณะก้อนเนื้อ
+2. **เส้นทางการเรียนรู้และวิวัฒนาการ (Roadmap):** ท่านสามารถสำรวจการเปลี่ยนแปลงตั้งแต่การสรุปแบบข้อความล้วนในอดีต (Chapter 1, 2) จนถึงการริเริ่มใช้กรอบตาราง (Chapter 3, 11) และการก้าวกระโดดสู่ฉบับภาพประกอบเต็มรูปแบบ
+3. **เอกสารกำกับสถาปัตยกรรม (SKILL.md):** เอกสาร `SKILL.md` บรรจุ 27 หลักการในการกำกับ AI Harness ให้จัดหน้าสิ่งพิมพ์ทางการแพทย์อย่างแม่นยำ เอกสารส่วนนี้เปิดเผยเพื่อยืนยันความโปร่งใสในระเบียบวิธีคิดและการเขียนโปรแกรมควบคุม ท่านคณะกรรมการสามารถข้ามส่วนนี้ไปได้โดยไม่มีผลกระทบต่อการประเมินเนื้อหาทางวิชาการ
 
-## Website
+---
 
-`index.html` includes all CSS and JavaScript. No build tools are required. Open it directly or serve the repository root on GitHub Pages. Google Fonts supplies Outfit, Prompt, and Source Serif 4, with local font fallbacks.
+## 🏆 ผลงานเด่นในปัจจุบัน (Featured Editions)
 
-Features: responsive layout, keyboard-accessible image dialogs, reduced-motion support, mobile navigation, and direct PDF downloads. `assets/neoplasia_17p_manifest.json` records the gallery's figure and PDF page mapping. Publishing guidelines remain under `skill/`.
+### 1. Chapter 6 — Neoplasia: 17-Page High-Yield Illustrated Edition
+*ตำราพยาธิวิทยาเชิงลึกเรื่องเนื้องอกและโรคมะเร็ง ฉบับภาพประกอบสมบูรณ์ 17 หน้า A4*
 
-## Attribution
+📥 **[ดาวน์โหลดไฟล์ PDF ฉบับเต็ม (17 หน้า · 6.4 MB)](pdf/robbins_chapter6_neoplasia_complete_17p.pdf)**
 
-Educational summaries reference *Robbins Basic Pathology* and *Robbins & Cotran Pathologic Basis of Disease*. Original textbook content, figures, and trademarks belong to their respective rights holders. This independent educational project is not affiliated with or endorsed by the publisher and is not clinical diagnostic guidance.
+- **ภาพประกอบทางการแพทย์ของแท้ 15 ภาพ:** สกัดจาก Robbins 10th Edition ความละเอียดสูง โดยคงสัดส่วนภาพเดิม (Original Aspect Ratio) พร้อมบรรยายระบุ Figure อ้างอิงชัดเจน
+- **โครงสร้างเนื้อหาตามหลักวิชาการ:** ครอบคลุม 8 Cancer Hallmarks, 2 Enabling Characteristics, Knudson's Two-Hit Hypothesis (RB1), p53 Pathway, Wnt/β-Catenin Cascade, และกลไก Immune Checkpoint (PD-1 / CTLA-4)
+- **ระบบ Typography สิ่งพิมพ์แพทย์:** จัดวางเนื้อหาบนพื้นขาว (White Canvas) ด้วยฟอนต์ตระกูล Outfit และ Prompt ไร้กล่องตีกรอบหนาทึบ เพื่อความต่อเนื่องและสบายตาในการอ่านเชิงวิชาการ
+
+### 2. Chapter 5 — Genetic and Pediatric Diseases (11 หน้า A4)
+*พันธุศาสตร์การแพทย์และโรคในวัยเด็ก ฉบับจัดพิมพ์สองภาษา*
+
+📥 **[ดาวน์โหลดไฟล์ PDF (11 หน้า · 5.0 MB)](pdf/chapter5_pathology_deep_th.pdf)**
+
+- รวบรวม 14 ภาพแผนภาพพันธุศาสตร์ Mendelian Disorders, Chromosomal Abnormalities, และ Pediatric Neoplasms
+
+---
+
+## 📚 สารบรรณคลังตำราสรุปพยาธิวิทยา (Complete Library)
+
+| บทที่ (Chapter) | ชื่อบทวิชาการ (Title) | จำนวนหน้า | ระดับวิวัฒนาการ / สถานะ | ลิงก์ดาวน์โหลด |
+| :---: | :--- | :---: | :---: | :---: |
+| **6 (เด่น)** | **Neoplasia (High-Yield Illustrated Edition)** | **17** | **ผลงานสูงสุดปัจจุบัน (15 Micrographs)** | **[ดาวน์โหลด PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf)** |
+| **5** | **Genetic and Pediatric Diseases** | **11** | **ผลงานปัจจุบัน (14 Figures)** | **[ดาวน์โหลด PDF](pdf/chapter5_pathology_deep_th.pdf)** |
+| 8 | Infectious Diseases | 6 | *ฉบับทดลองในอดีต (อยู่ในแผนปรับปรุงใหม่)* | [ดาวน์โหลด PDF](pdf/chapter8_infectious_diseases_summary.pdf) |
+| 6 | Diseases of the Immune System | 8 | ฉบับปกเข้ม-เนื้อหาขาว ตารางเปรียบเทียบ | [ดาวน์โหลด PDF](pdf/chapter6_pathology_deep_th.pdf) |
+| 4 | Hemodynamic Disorders, Thromboembolism & Shock | 8 | ริเริ่มการแยกหน้าปกเต็มเล่มออกจากเนื้อหา | [ดาวน์โหลด PDF](pdf/chapter4_pathology_deep_th.pdf) |
+| 11 | Blood Vessels & Vascular Pathology | 7 | จัดระเบียบเนื้อหากระชับเป็นกล่องและตาราง | [ดาวน์โหลด PDF](pdf/chapter11_pathology_deep_th.pdf) |
+| 3 | Inflammation and Tissue Repair | 11 | วางระบบตารางและกล่องเน้นประเด็นสำคัญ | [ดาวน์โหลด PDF](pdf/chapter3_pathology_deep_th.pdf) |
+| 2 | Cell Injury, Death, and Adaptations | 10 | จุดเริ่มต้นโครงสร้าง Bullet Points เชิงลึก | [ดาวน์โหลด PDF](pdf/chapter2_pathology_deep_th.pdf) |
+| 1 | The Genome and Cellular Pathology | 12 | ฉบับปฐมบทของการบันทึกพยาธิวิทยา | [ดาวน์โหลด PDF](pdf/chapter1_pathology_deep_th.pdf) |
+
+---
+
+## 📁 แหล่งจัดเก็บเอกสารเพิ่มเติม (Google Drive Archives)
+
+นอกเหนือจากเอกสาร PDF ในคลังนี้ ข้าพเจ้าได้เปิดเผยแฟ้มเอกสารต้นทางและเอกสารสรุปอื่น ๆ บน Google Drive เพื่อให้คณาจารย์สามารถตรวจสอบกระบวนการจดบันทึกจริงได้:
+
+- 📂 **[แฟ้มงาน Robbins Pathology ที่อ่านและจดบันทึกแล้ว](https://drive.google.com/drive/folders/1kiDypqpnCjjLHkTr4289C9hQM19JZDoI)**: บันทึกการอ่านไฮไลต์และโน้ตย่อส่วนบุคคลจากตำราจริง
+- 📚 **[แฟ้มคลังสรุปเนื้อหาทางการแพทย์ทุกรายวิชา](https://drive.google.com/drive/folders/1UEChba6SCFTBzKRiNiPAt-91jgkjeoc4)**: คลังเอกสารสรุปบทเรียนวิทยาศาสตร์การแพทย์ขั้นพื้นฐานที่ได้รวบรวมไว้ตลอดการศึกษา
+
+---
+
+## 🛠️ โครงสร้างทางเทคโนโลยี (Technical Implementation)
+
+- **Frontend & Presentation:** HTML5, Modern CSS (Bento Grid, Custom Radial Shading, Native Dialog Atlas), JavaScript แบบ Zero-dependency
+- **Typesetting & Rendering Engine:** Python, Playwright Headless Chromium Engine ควบคุมการพิมพ์ด้วย `@media print`
+- **Image Pipeline:** PyMuPDF (`fitz`) สำหรับการสกัดภาพจุลทรรศน์ความละเอียดสูงระดับ Full HD ตรงจากไฟล์ตำราต้นฉบับ
+- **Formula & Data Rendering:** KaTeX สำหรับสมการชีวเคมีและชีวสถิติ
+
+---
+
+## ⚖️ ข้อความสงวนสิทธิ์และจริยธรรมทางวิชาการ (Academic Disclaimer & Attribution)
+
+1. **ความเคารพในลิขสิทธิ์ต้นฉบับ (Copyright & Attribution):**  
+   เนื้อหา ภาพประกอบ จุลพยาธิวิทยา และเครื่องหมายทางการค้าทั้งหมด เป็นลิขสิทธิ์ของสำนักพิมพ์ Elsevier และคณะผู้ประพันธ์ตำรา *Robbins Basic Pathology* และ *Robbins & Cotran Pathologic Basis of Disease* (10th Edition)
+2. **วัตถุประสงค์เพื่อการศึกษา (Educational Purpose Only):**  
+   โครงการนี้จัดทำขึ้นโดยอิสระ โดยมีวัตถุประสงค์เพื่อการศึกษา การค้นคว้าทบทวนส่วนบุคคล และการแสดงศักยภาพทางวิชาการในการสมัครเข้าศึกษาต่อเท่านั้น มิได้จัดทำขึ้นเพื่อการพาณิชย์ หรือมีส่วนเกี่ยวข้องอย่างเป็นทางการกับสำนักพิมพ์
+3. **มิใช่คำแนะนำทางการแพทย์ (Not Medical Advice):**  
+   เอกสารทั้งหมดใช้เพื่อการเรียนรู้ทางวิชาการระดับนักเรียน/นักศึกษาแพทย์ ไม่สามารถนำไปใช้อ้างอิงสำหรับการวินิจฉัย การตัดสินใจ หรือการรักษาทางคลินิก (Clinical Decision Making) กับผู้ป่วยจริงได้
