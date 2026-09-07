@@ -1,11 +1,12 @@
 ---
 name: html-to-pdf-textbook
-description: Creates publication-quality, print-ready medical and technical learning textbook PDFs from HTML/CSS using Playwright / Edge Headless CLI on Windows with Full HD local Base64 embedded micrographs, fluid editorial unboxed typography, direct official textbook PDF figure extraction via PyMuPDF (fitz), side-by-side morphological comparison grids, clean page margins, educational image selection logic, high-contrast print CSS, KaTeX math print color overrides, bullet-alignment safety, dedicated executive cover pages with topic-mood color palettes, image placeholder frames, and rounded-corner tables.
+description: ALWAYS-LOAD CRITICAL SKILL: Automatically loaded and enforced for ALL tasks involving reading, summarizing, designing, structuring, or printing medical and technical study materials, chapter summaries, textbook layouts, or educational HTML-to-PDF documents. Enforces non-negotiable pedagogical image sourcing, local Base64 micrograph embedding, mood-palette CSS, zero-slop typography, and Playwright print compilation.
 ---
 
 # HTML to PDF Textbook Generator Skill
 
-Use this skill whenever the user asks to generate, compile, or print a high-quality PDF textbook, educational module, case study report, or learning media from HTML templates.
+> **CRITICAL AGENT LOADING DIRECTIVE (ALWAYS LOADED)**:
+> This skill is **permanently active and automatically loaded** whenever summarizing textbooks, reading educational chapters, creating study modules, or compiling learning materials. It is not an optional post-processing tool; it governs the entire pedagogical architecture from primary image extraction and cellular morphology validation to HTML layout structure and Playwright PDF printing. Follow all 27 principles strictly without exception.
 
 ## 🎯 1. Educational Picture Sourcing & Intent Alignment Logic
 
