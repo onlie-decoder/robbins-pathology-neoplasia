@@ -1381,7 +1381,7 @@ function startAmbientLoop(element, draw) {
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1588,8 +1588,15 @@ function startAmbientLoop(element, draw) {
   let cascadeStartTime = -100;
   let shootingStars = [];
   let nextShootingStarTime = 1.2;
+  let lastFrameTime = 0;
 
-  function render() {
+  function render(now) {
+    if (now && now - lastFrameTime < 15.5) {
+      if (!motionPreference.matches && !document.hidden) frame = requestAnimationFrame(render);
+      return;
+    }
+    lastFrameTime = now || performance.now();
+
     time += motionPreference.matches ? 0 : 0.016;
     ctx.clearRect(0, 0, width, height);
 
@@ -1853,24 +1860,35 @@ function startAmbientLoop(element, draw) {
       });
     }
 
-    // 4. Draw constellation filament lines (ONLY when close, increasing opacity)
+    // 4. Draw constellation filament lines (batched by color for 60fps performance)
     if (lineOpacity > 0.01) {
+      const edgeGroups = {};
+      const pulseAlpha = 0.85 + 0.15 * Math.sin(time * 2.5);
       graph.edges.forEach(e => {
         const u = e.source !== undefined ? e.source : e.from;
         const v = e.target !== undefined ? e.target : e.to;
         const p1 = currentPositions[u];
         const p2 = currentPositions[v];
         if (!p1 || !p2) return;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = e.color || '#a855f7';
-        ctx.globalAlpha = (e.alpha || 0.5) * lineOpacity * (0.85 + 0.15 * Math.sin(time * 2.5));
-        ctx.lineWidth = (e.width || 0.75) * (0.85 + 0.3 * lineOpacity);
-        ctx.shadowColor = e.color || '#a855f7';
-        ctx.shadowBlur = 10 * lineOpacity;
-        ctx.stroke();
+        const col = e.color || '#a855f7';
+        if (!edgeGroups[col]) edgeGroups[col] = [];
+        edgeGroups[col].push(p1.x, p1.y, p2.x, p2.y);
       });
+
+      for (const col in edgeGroups) {
+        const coords = edgeGroups[col];
+        ctx.beginPath();
+        for (let i = 0; i < coords.length; i += 4) {
+          ctx.moveTo(coords[i], coords[i+1]);
+          ctx.lineTo(coords[i+2], coords[i+3]);
+        }
+        ctx.strokeStyle = col;
+        ctx.globalAlpha = 0.5 * lineOpacity * pulseAlpha;
+        ctx.lineWidth = 0.85 + 0.3 * lineOpacity;
+        ctx.shadowColor = col;
+        ctx.shadowBlur = Math.min(8, 8 * lineOpacity);
+        ctx.stroke();
+      }
     }
 
     // 5. Draw stellar star nodes (star shapes, circles, varied sizes, and growth)
@@ -1958,8 +1976,13 @@ function startAmbientLoop(element, draw) {
 
       ctx.fillStyle = starFillColor;
       ctx.globalAlpha = (starProgress > 0.4 ? 0.98 : s.skyAlpha * ambientSkyAlpha) * tw;
-      ctx.shadowColor = starGlowColor;
-      ctx.shadowBlur = (4 + 9 * starProgress + (bumpIntensity || 0) * 28 + cascadeGlowSurge) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1);
+      const isSimpleCircle = s.shapeType === 'circle' && radius < 2.5 && !bumpIntensity && !cascadeGlowSurge;
+      if (isSimpleCircle) {
+        ctx.shadowBlur = 0;
+      } else {
+        ctx.shadowColor = starGlowColor;
+        ctx.shadowBlur = Math.min(18, (4 + 9 * starProgress + (bumpIntensity || 0) * 28 + cascadeGlowSurge) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1));
+      }
 
       // Render actual star shapes vs circles
       if (s.shapeType === 'star4') {
