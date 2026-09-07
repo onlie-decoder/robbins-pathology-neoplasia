@@ -1,59 +1,39 @@
-# Robbins Pathology: Neoplasia Medical Textbook Portfolio
+# Robbins Basic Pathology Summaries & Illustrated Textbooks Series
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Showcase-8B5CF6?style=for-the-badge&logo=github)](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)
-[![USMLE Step 1](https://img.shields.io/badge/Curriculum-USMLE%20Step%201-F43F5E?style=for-the-badge&logo=medical-cross)](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)
-[![Pages](https://img.shields.io/badge/Textbook-47%20A4%20Pages-00F2FE?style=for-the-badge)](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)
+An independent academic portfolio by [onlie-decoder](https://github.com/onlie-decoder), presenting AI-assisted pathology summaries and illustrated learning materials. The author's workflow uses LangChain for summarization; this repository contains published artifacts and the website, not a runnable LangChain application.
 
-A publication-grade medical pathology textbook summary, interactive digital reader, and computational publishing engine covering **Robbins Basic Pathology 10th Edition Chapter 6: Neoplasia (Cellular & Molecular Pathology)**.
+**[Open the live portfolio](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)**
 
----
+## Featured edition
 
-## 🌐 Live GitHub Pages Showcase
+**Chapter 6 — Neoplasia: 17-Page High-Yield Complete Illustrated Edition**
 
-Explore the interactive web portfolio with all 37 authentic Robbins micrographs and molecular pathway diagrams:
+[Download the 17-page PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf)
 
-👉 **[https://onlie-decoder.github.io/robbins-pathology-neoplasia/](https://onlie-decoder.github.io/robbins-pathology-neoplasia/)**
+- Verified 17 A4 pages with 15 pathology images and molecular diagrams.
+- Covers 8 cancer hallmarks and 2 enabling characteristics as organized in the actual PDF, plus grading and TNM staging.
+- Gallery images are extracted directly from this edition without resampling. Figure titles and numbers follow the PDF's Chapter 7 source numbering; the portfolio retains Chapter 6 as the special-edition label.
+- Fluid editorial layout, KaTeX typesetting, and Chromium-based publishing.
 
----
+## Complete library
 
-## 📕 Textbook PDF Downloads
+| Chapter | Edition | Pages | Download |
+| --- | --- | --- | --- |
+| 1 | The Genome and Cellular Pathology | 12 | [PDF](pdf/chapter1_pathology_deep_th.pdf) |
+| 2 | Cell Injury, Death, and Adaptations | 10 | [PDF](pdf/chapter2_pathology_deep_th.pdf) |
+| 3 | Inflammation and Tissue Repair | 11 | [PDF](pdf/chapter3_pathology_deep_th.pdf) |
+| 4 | Hemodynamic Disorders, Thromboembolism & Shock | 8 | [PDF](pdf/chapter4_pathology_deep_th.pdf) |
+| 5 | Genetic and Pediatric Diseases | 11 | [PDF](pdf/chapter5_pathology_deep_th.pdf) |
+| 6 | Diseases of the Immune System | 8 | [PDF](pdf/chapter6_pathology_deep_th.pdf) |
+| 6 — Special | Neoplasia, High-Yield Fluid Edition | 17 | [PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf) |
+| 11 | Blood Vessels & Vascular Pathology | 7 | [PDF](pdf/chapter11_pathology_deep_th.pdf) |
 
-| Edition | Description | Pages | File Size | Direct Download |
-| :--- | :--- | :---: | :---: | :---: |
-| **Complete Illustrated Edition** | Definitive exhaustive Robbins Basic Pathology Chapter 6 textbook with all 37 authentic figures, full diagnostic criteria, and molecular cascades | 47 | 8.0 MB | [Download PDF](pdf/neoplasia_complete_illustrated.pdf) |
-| **Fluid Editorial Summary** | High-yield unboxed editorial edition covering Robbins & Cotran Chapter 7 core concepts, USMLE clinical pearls, and tumor markers | 17 | 6.4 MB | [Download PDF](pdf/chapter7_pathology_deep_th.pdf) |
+## Website
 
----
+`index.html` includes all CSS and JavaScript. No build tools are required. Open it directly or serve the repository root on GitHub Pages. Google Fonts supplies Outfit, Prompt, and Source Serif 4, with local font fallbacks.
 
-## 🧬 Curriculum Coverage (Robbins Basic Pathology Ch. 6)
+Features: responsive layout, keyboard-accessible image dialogs, reduced-motion support, mobile navigation, and direct PDF downloads. `assets/neoplasia_17p_manifest.json` records the gallery's figure and PDF page mapping. Publishing guidelines remain under `skill/`.
 
-1. **Nomenclature & Characteristics of Tumors**: Parenchyma vs. stroma, benign vs. malignant naming conventions, teratomas, pleomorphic adenomas, choristomas vs. hamartomas.
-2. **Benign vs. Malignant Differentiation**: Differentiation, anaplasia, nuclear pleomorphism, atypical tripolar mitoses, loss of polarity, dysplasia, and carcinoma in situ (CIN III).
-3. **Epidemiology of Cancer**: Geographical distribution, occupational carcinogens, age distribution, acquired preneoplastic disorders.
-4. **The Molecular Basis of Cancer**: The 8 Hallmarks of Cancer (Hanahan & Weinberg / Robbins model).
-5. **Oncogenes & Growth Signaling**: *RAS*, *BRAF*, *MYC*, Receptor Tyrosine Kinases (EGFR, HER2), translocation oncogenes (Philadelphia chromosome $t(9;22)$ *BCR-ABL*).
-6. **Tumor Suppressor Genes**: Knudson's Two-Hit Model (*RB1*), *TP53* Guardian of the Genome, *APC* / Wnt / $\beta$-catenin cascade, *CDKN2A*, *BRCA1/2*.
-7. **Metabolic Reprogramming & Replicative Immortality**: Warburg effect (aerobic glycolysis), *IDH* mutations and oncometabolites, telomerase reactivation and crisis escape.
-8. **Invasion & Metastasis Cascade**: 4-step ECM invasion (loss of E-cadherin, basement membrane degradation by MMPs/cathepsins, migration), organ tropism ("Seed and Soil").
-9. **Tumor Immunology**: Antigens, immune surveillance, immune checkpoint evasion (PD-1 / PD-L1, CTLA-4), checkpoint inhibitor therapeutics.
-10. **Carcinogenesis**: Direct and indirect chemical carcinogens, ionizing and UV radiation, microbial oncogenesis (HPV E6/E7, EBV, HBV/HCV, *H. pylori*).
-11. **Clinical Features of Tumors**: Local effects, cachexia, paraneoplastic syndromes (hypercalcemia, Cushing, Trousseau), grading vs. TNM staging, diagnostic tumor markers (PSA, AFP, CEA, CA-125).
+## Attribution
 
----
-
-## ⚙️ The `html-to-pdf-textbook` Publishing Engine
-
-Developed as a dedicated agentic publishing skill (`skill/SKILL.md`) incorporating 27 codified publishing rules:
-
-- **Fluid Editorial Typography**: Unboxed, breathable editorial flow with subtle 1px divider lines.
-- **CSS Paged Media Precision**: `@page { margin: 10mm 12mm 12mm 12mm; }` with `@page :first { margin: 0; }` for full-bleed cover pages.
-- **Zero-Token Layout Audit**: Programmatic PyMuPDF coordinate assertions detecting stranded headings in sub-second execution (0 tokens, 0.1s).
-- **Zero-CORS Base64 Pipeline**: 100% self-contained offline Base64 asset embedding.
-- **Mathematical & Biochemical Typesetting**: KaTeX rendering for cytogenetics, translocations, and enzymatic formulas.
-
----
-
-## 👨‍⚕️ Author & Attribution
-
-- **Curated & Built by**: [onlie-decoder](https://github.com/onlie-decoder)
-- **Source Material**: *Robbins Basic Pathology (10th Edition)* by Vinay Kumar, Abul K. Abbas, Jon C. Aster; *Robbins & Cotran Pathologic Basis of Disease (10th Edition)*.
+Educational summaries reference *Robbins Basic Pathology* and *Robbins & Cotran Pathologic Basis of Disease*. Original textbook content, figures, and trademarks belong to their respective rights holders. This independent educational project is not affiliated with or endorsed by the publisher and is not clinical diagnostic guidance.
