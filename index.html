@@ -1401,7 +1401,30 @@ function startAmbientLoop(element, draw) {
     ctx.closePath();
   }
 
+  function hexToRgb(hex) {
+    if (!hex || hex[0] !== '#') return { r: 255, g: 255, b: 255 };
+    let h = hex.slice(1);
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    const num = parseInt(h, 16);
+    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+  }
+
+  function lerpColor(c1, c2, t) {
+    const clampedT = Math.max(0, Math.min(1, t));
+    const r = Math.round(c1.r + (c2.r - c1.r) * clampedT);
+    const g = Math.round(c1.g + (c2.g - c1.g) * clampedT);
+    const b = Math.round(c1.b + (c2.b - c1.b) * clampedT);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  const COLOR_WHITE = { r: 255, g: 255, b: 255 };
+  const COLOR_GREEN = { r: 52, g: 211, b: 153 };  // Emerald green #34d399
+  const COLOR_PURPLE = { r: 192, g: 132, b: 252 }; // Royal violet #c084fc
+  const COLOR_YELLOW = { r: 253, g: 224, b: 71 };  // Radiant gold / yellow #fde047
+
   function initStars() {
+    const maxCoreDist = 1.35;
+
     flowerStars = graph.nodes.map((node) => {
       const nId = node.id !== undefined ? node.id : 0;
       const seed = ((nId * 9301 + 49297) % 233280) / 233280;
@@ -1435,6 +1458,10 @@ function startAmbientLoop(element, draw) {
       const growSpeed = 1.2 + ((nId * 23) % 5) * 0.35;
       const growPhase = nId * 0.95;
 
+      // Fast domino cascade delay based on distance from central golden core
+      const distFromCore = Math.hypot(node.x, node.y - (-0.05));
+      const cascadeDelay = (distFromCore / maxCoreDist) * 0.42;
+
       return {
         skyX: Math.random() * width,
         skyY: Math.random() * height,
@@ -1449,6 +1476,7 @@ function startAmbientLoop(element, draw) {
         fx: node.x,
         fy: node.y,
         color: node.color,
+        origRgb: hexToRgb(node.color),
         size: finalSize,
         group: node.group,
         shapeType: shapeType,
@@ -1456,7 +1484,8 @@ function startAmbientLoop(element, draw) {
         isGrowing: isGrowing,
         growFactor: growFactor,
         growSpeed: growSpeed,
-        growPhase: growPhase
+        growPhase: growPhase,
+        cascadeDelay: cascadeDelay
       };
     });
 
@@ -1485,6 +1514,9 @@ function startAmbientLoop(element, draw) {
   let time = 0;
   let isUnlocked = false;
   let unlockStartTime = -100;
+  let isCascadeTriggered = false;
+  let cascadeStartTime = -100;
+
   function render() {
     time += motionPreference.matches ? 0 : 0.016;
     ctx.clearRect(0, 0, width, height);
@@ -1497,14 +1529,16 @@ function startAmbientLoop(element, draw) {
     const scrollProgress = Math.min(1, Math.max(0, scrollY / maxScroll));
 
     // 1. Star formation: stars start scattered, smoothly converge into the Kanphai shape,
-    // reaching 100% alignment by 99% of the roadmap page. Strictly no lines during roadmap!
+    // reaching 100% alignment at 105% of the roadmap page (5% after roadmap finished, in #kanphai-bloom).
+    // Strictly no lines during roadmap!
     let starProgress = 0;
     const roadmapEl = document.getElementById('roadmap');
+    let targetEndScroll = 0;
     if (roadmapEl) {
       const rRect = roadmapEl.getBoundingClientRect();
       const rTop = rRect.top + window.scrollY;
       const rHeight = roadmapEl.offsetHeight;
-      const targetEndScroll = rTop + rHeight * 0.99 - height;
+      targetEndScroll = rTop + rHeight * 1.05 - height; // 105% of roadmap!
       const startScroll = height * 0.15;
       if (scrollY <= startScroll) {
         starProgress = 0;
@@ -1514,38 +1548,36 @@ function startAmbientLoop(element, draw) {
         starProgress = easeInOutCubic((scrollY - startScroll) / (targetEndScroll - startScroll));
       }
     } else {
-      starProgress = easeInOutCubic(Math.min(1, Math.max(0, (scrollProgress - 0.05) / 0.85)));
+      targetEndScroll = maxScroll * 0.94;
+      starProgress = easeInOutCubic(Math.min(1, Math.max(0, (scrollProgress - 0.05) / 0.89)));
     }
     if (motionPreference.matches) {
-      starProgress = scrollProgress > 0.85 ? 1 : 0;
+      starProgress = scrollY >= targetEndScroll ? 1 : 0;
     }
 
-    // 2. Lines and petal fills: NO lines during roadmap! Lines ONLY appear when entering
-    // the blank page, increasing opacity after the shape is already fully formed.
+    // 2. Lines and petal fills: strictly NO lines during roadmap!
+    // Lines start forming right when stars finish aligning (at 105% roadmap)!
     let lineOpacity = 0;
-    if (finale) {
-      const finaleRect = finale.getBoundingClientRect();
-      if (finaleRect.top < height) {
-        const enterProgress = Math.min(1, Math.max(0, (height - finaleRect.top) / (height * 0.75)));
-        lineOpacity = easeInOutCubic(enterProgress);
-      }
-    } else if (scrollProgress > 0.82) {
-      const t = Math.min(1, Math.max(0, (scrollProgress - 0.82) / 0.18));
-      lineOpacity = easeInOutCubic(t);
+    if (scrollY >= targetEndScroll) {
+      const lineScrollDist = Math.max(1, maxScroll - targetEndScroll);
+      const enterProgress = Math.min(1, Math.max(0, (scrollY - targetEndScroll) / (lineScrollDist * 0.55)));
+      lineOpacity = easeInOutCubic(enterProgress);
     }
     if (motionPreference.matches) {
-      lineOpacity = lineOpacity > 0.5 ? 1 : 0;
+      lineOpacity = scrollY >= targetEndScroll ? 1 : 0;
     }
 
-    // 3. Game Item Unlock / Milestone reveal trigger
-    // Triggers when constellation reaches full reveal on the blank page
-    if (lineOpacity > 0.90) {
-      if (!isUnlocked) {
-        isUnlocked = true;
+    // 3. Fast Chromatic Cascade Flash & Unlock Trigger:
+    // Triggers when stars reach 100% alignment (at 105% roadmap) and lines form
+    if (starProgress >= 0.99 && lineOpacity > 0.04) {
+      if (!isCascadeTriggered) {
+        isCascadeTriggered = true;
+        cascadeStartTime = time;
         unlockStartTime = time;
       }
-    } else if (lineOpacity < 0.40) {
-      isUnlocked = false; // re-arm if scrolled back up
+    } else if (scrollY < targetEndScroll - height * 0.35) {
+      isCascadeTriggered = false; // re-arms when scrolling back up into roadmap
+      isUnlocked = false;
     }
 
     const unlockElapsed = time - unlockStartTime;
@@ -1705,6 +1737,69 @@ function startAmbientLoop(element, draw) {
     currentPositions.forEach(({ x, y, s, bumpIntensity }) => {
       const tw = 0.72 + 0.28 * Math.sin(time * s.twinkleSpeed * 60 + s.twinklePhase);
 
+      // Chromatic Cascade calculation (White -> Green -> Purple -> Yellow -> Original Color)
+      let starFillColor = '#ffffff';
+      let starGlowColor = '#ffffff';
+      let cascadeScaleBump = 1;
+      let cascadeGlowSurge = 0;
+
+      if (isCascadeTriggered && !motionPreference.matches) {
+        const dt = time - cascadeStartTime - s.cascadeDelay;
+        if (dt < 0) {
+          // Pre-cascade starlight state: clean pure white
+          starFillColor = '#ffffff';
+          starGlowColor = '#ffffff';
+        } else if (dt < 0.12) {
+          // Stage 1: Intense White Flash ("one star gets white and everything gets white")
+          const t = dt / 0.12;
+          starFillColor = '#ffffff';
+          starGlowColor = '#ffffff';
+          cascadeScaleBump = 1 + 0.90 * Math.sin(t * Math.PI);
+          cascadeGlowSurge = 32 * (1 - t * 0.2);
+        } else if (dt < 0.28) {
+          // Stage 2: Transforms to Green
+          const t = (dt - 0.12) / 0.16;
+          starFillColor = lerpColor(COLOR_WHITE, COLOR_GREEN, t);
+          starGlowColor = '#34d399';
+          cascadeScaleBump = 1 + 0.45 * (1 - t);
+          cascadeGlowSurge = 24 * (1 - t * 0.3);
+        } else if (dt < 0.44) {
+          // Stage 3: Transforms to Purple
+          const t = (dt - 0.28) / 0.16;
+          starFillColor = lerpColor(COLOR_GREEN, COLOR_PURPLE, t);
+          starGlowColor = '#c084fc';
+          cascadeScaleBump = 1 + 0.25 * (1 - t);
+          cascadeGlowSurge = 20 * (1 - t * 0.3);
+        } else if (dt < 0.60) {
+          // Stage 4: Transforms to Yellow
+          const t = (dt - 0.44) / 0.16;
+          starFillColor = lerpColor(COLOR_PURPLE, COLOR_YELLOW, t);
+          starGlowColor = '#fde047';
+          cascadeScaleBump = 1.0;
+          cascadeGlowSurge = 16 * (1 - t * 0.3);
+        } else if (dt < 0.82) {
+          // Stage 5: Transforms to originally designed botanical color
+          const t = (dt - 0.60) / 0.22;
+          starFillColor = lerpColor(COLOR_YELLOW, s.origRgb, t);
+          starGlowColor = s.color;
+          cascadeScaleBump = 1.0;
+          cascadeGlowSurge = 10 * (1 - t);
+        } else {
+          // Stage 6: Settled in original designed color
+          starFillColor = s.color;
+          starGlowColor = s.color;
+          cascadeScaleBump = 1.0;
+          cascadeGlowSurge = 0;
+        }
+      } else if (starProgress >= 1.0) {
+        starFillColor = s.color;
+        starGlowColor = s.color;
+      } else {
+        // While traveling through roadmap before cascade
+        starFillColor = '#ffffff';
+        starGlowColor = '#ffffff';
+      }
+
       // Dynamic growth calculation:
       // Growing stars expand progressively as starProgress increases + gentle rhythmic breathing
       let growthMultiplier = 1;
@@ -1712,18 +1807,19 @@ function startAmbientLoop(element, draw) {
         const pulse = motionPreference.matches ? 1 : (1 + 0.18 * Math.sin(time * s.growSpeed + s.growPhase));
         growthMultiplier = (1 + s.growFactor * starProgress) * (starProgress > 0.2 ? pulse : 1);
       }
-      // Apply unlock wave bump to star scale!
+      // Apply unlock wave bump and cascade scale bump to star scale!
       if (bumpIntensity > 0) {
         growthMultiplier *= (1 + 0.90 * bumpIntensity);
       }
+      growthMultiplier *= cascadeScaleBump;
 
       const targetRadius = s.size * 0.95 * growthMultiplier;
       const radius = (1 - starProgress) * s.skyR + starProgress * targetRadius;
 
-      ctx.fillStyle = starProgress > 0.4 ? s.color : '#ffffff';
-      ctx.globalAlpha = (starProgress > 0.4 ? 0.96 : s.skyAlpha * ambientSkyAlpha) * tw;
-      ctx.shadowColor = starProgress > 0.4 ? s.color : '#ffffff';
-      ctx.shadowBlur = (4 + 9 * starProgress + (bumpIntensity || 0) * 28) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1);
+      ctx.fillStyle = starFillColor;
+      ctx.globalAlpha = (starProgress > 0.4 ? 0.98 : s.skyAlpha * ambientSkyAlpha) * tw;
+      ctx.shadowColor = starGlowColor;
+      ctx.shadowBlur = (4 + 9 * starProgress + (bumpIntensity || 0) * 28 + cascadeGlowSurge) * (starProgress > 0.8 ? (0.8 + 0.2 * lineOpacity) : 1);
 
       // Render actual star shapes vs circles
       if (s.shapeType === 'star4') {
