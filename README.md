@@ -53,13 +53,12 @@
 | :---: | :--- | :---: | :---: | :---: |
 | **6 (เด่น)** | **Neoplasia (High-Yield Illustrated Edition)** | **17** | **ผลงานสูงสุดปัจจุบัน (15 ภาพและแผนภาพ)** | **[ดาวน์โหลด PDF](pdf/robbins_chapter6_neoplasia_complete_17p.pdf)** |
 | **5** | **Genetic and Pediatric Diseases** | **11** | **ผลงานปัจจุบัน (14 Figures)** | **[ดาวน์โหลด PDF](pdf/chapter5_pathology_deep_th.pdf)** |
-| 8 | Infectious Diseases | 6 | *ฉบับทดลองในอดีต (อยู่ในแผนปรับปรุงใหม่)* | [ดาวน์โหลด PDF](pdf/chapter8_infectious_diseases_summary.pdf) |
 | 6 | Diseases of the Immune System | 8 | ฉบับปกเข้ม-เนื้อหาขาว ตารางเปรียบเทียบ | [ดาวน์โหลด PDF](pdf/chapter6_pathology_deep_th.pdf) |
 | 4 | Hemodynamic Disorders, Thromboembolism & Shock | 8 | ริเริ่มการแยกหน้าปกเต็มเล่มออกจากเนื้อหา | [ดาวน์โหลด PDF](pdf/chapter4_pathology_deep_th.pdf) |
 | 11 | Blood Vessels & Vascular Pathology | 7 | จัดระเบียบเนื้อหากระชับเป็นกล่องและตาราง | [ดาวน์โหลด PDF](pdf/chapter11_pathology_deep_th.pdf) |
-| 3 | Inflammation and Tissue Repair | 11 | วางระบบตารางและกล่องเน้นประเด็นสำคัญ | [ดาวน์โหลด PDF](pdf/chapter3_pathology_deep_th.pdf) |
-| 2 | Cell Injury, Death, and Adaptations | 10 | จุดเริ่มต้นโครงสร้าง Bullet Points เชิงลึก | [ดาวน์โหลด PDF](pdf/chapter2_pathology_deep_th.pdf) |
-| 1 | The Genome and Cellular Pathology | 12 | ฉบับปฐมบทของการบันทึกพยาธิวิทยา | [ดาวน์โหลด PDF](pdf/chapter1_pathology_deep_th.pdf) |
+| 3 | Inflammation and Tissue Repair | 13 | วางระบบตารางและกล่องเน้นประเด็นสำคัญ | [ดาวน์โหลด PDF](pdf/chapter3_pathology_deep_th.pdf) |
+| 2 | Cell Injury, Death, and Adaptations | 13 | จุดเริ่มต้นโครงสร้าง Bullet Points เชิงลึก | [ดาวน์โหลด PDF](pdf/chapter2_pathology_deep_th.pdf) |
+| 1 | The Genome and Cellular Pathology | 13 | ฉบับปฐมบทของการบันทึกพยาธิวิทยา | [ดาวน์โหลด PDF](pdf/chapter1_pathology_deep_th.pdf) |
 
 ---
 
