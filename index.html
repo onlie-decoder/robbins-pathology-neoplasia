@@ -1718,7 +1718,7 @@ function startAmbientLoop(element, draw) {
     }
 
     // 2. Compute flower constellation coordinates
-    // Pure grand flower taking up the whole page, centered vertically and horizontally
+    // Center the flower with breathing room around its glowing tips.
     const isMobile = width < 768;
     const finaleRect = finale.getBoundingClientRect();
     const left = Math.max(0, finaleRect.left);
@@ -1728,11 +1728,11 @@ function startAmbientLoop(element, draw) {
     const cx = (left + right) / 2 + mouseX * (isMobile ? 10 : 25) * starProgress;
     const cy = height * 0.50 + mouseY * (isMobile ? 8 : 20) * starProgress;
 
-    // Grand scale taking up the full page viewport
+    // Reserve space for parallax, the unlock pulse, and the outer star glow.
     const baseScale = Math.min(
-      contentWidth * (isMobile ? 0.78 : 0.62),
-      height * (isMobile ? 0.44 : 0.45),
-      isMobile ? 260 : 420
+      contentWidth * (isMobile ? 0.62 : 0.50),
+      height * 0.35,
+      isMobile ? 220 : 340
     );
 
     // Elastic scale pop for constellation upon unlock (game item unlock feeling)
